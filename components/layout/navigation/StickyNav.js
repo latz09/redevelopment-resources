@@ -11,7 +11,7 @@ const StickyNav = ({ navLinks, logoUrl }) => {
 
 	useEffect(() => {
 		const setThreshold = () => {
-			threshold.current = window.innerHeight * 0.88;
+			threshold.current = window.innerHeight * 0.25;
 		};
 		setThreshold();
 		window.addEventListener('resize', setThreshold);

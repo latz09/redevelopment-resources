@@ -5,6 +5,7 @@ import { FETCH_HOME_PAGE_QUERY as Q } from '@/data/queries/pages/FETCH_HOME_PAGE
 import PageContainer from '@/components/animations/PageContainer';
 import Hero from '@/components/sections/home-page/Hero';
 import Approach from '@/components/sections/home-page/Approach';
+import Services from '@/components/sections/home-page/Services';
 
 export async function generateMetadata() {
 	return BPM({ slug: '/', query: Q });
@@ -26,6 +27,7 @@ const Home = async () => {
 				<Hero data={hero} />
 				<Approach data={approach} />
 			</div>
+			<Services data={services} /> 
 
 			{/* future sections go here */}
 		</PageContainer>

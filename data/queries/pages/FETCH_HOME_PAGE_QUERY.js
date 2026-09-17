@@ -14,16 +14,16 @@ export const FETCH_HOME_PAGE_QUERY = `{
       heading,
       body
     },
-    services{
-      sectionLabel,
-      heading,
-      analysisCard{ title, description },
-      strategyCard{ title, description },
-      redevelopmentCard{ title, description },
-      financingCard{ title, description },
-      implementationCard{ title, description },
-      notSureCard{ title, description, ctaLabel }
-    },
+   services{
+  sectionLabel,
+  heading,
+analysisCard{ title, description, url, "iconUrl": icon.asset->url },
+  strategyCard{ title, description, url, "iconUrl": icon.asset->url },
+  redevelopmentCard{ title, description, url, "iconUrl": icon.asset->url },
+  financingCard{ title, description, url, "iconUrl": icon.asset->url },
+  implementationCard{ title, description, url, "iconUrl": icon.asset->url },
+  notSureCard{ title, description, ctaLabel, url }
+},
     whoWeServe{
       sectionLabel,
       heading,
@@ -58,4 +58,4 @@ export const FETCH_HOME_PAGE_QUERY = `{
     title,
     location
   }
-}`
+}`;

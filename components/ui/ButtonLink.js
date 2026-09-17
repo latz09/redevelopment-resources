@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { track } from '@vercel/analytics';
 import { useEffect, useRef } from 'react';
 
-function ArrowGrow() {
+export function ArrowGrow() {
 	return (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
@@ -22,7 +22,7 @@ function ArrowGrow() {
 				y2='5.85449'
 				stroke='currentColor'
 				strokeWidth='2'
-				className='transition-transform duration-300 group-hover:[transform:scaleX(1.6)]'
+				className='transition-transform duration-1000 group-hover:[transform:scaleX(1.6)] group-hover/card:[transform:scaleX(1.6)]'
 				style={{ transformOrigin: '15px 5.85px' }}
 			/>
 			<path
@@ -36,13 +36,13 @@ function ArrowGrow() {
 
 const VARIANTS = {
 	// PRIMARY
-	'primary-on-light': 'bg-secondary text-white border border-secondary hover:bg-light hover:text-secondary',
-	'primary-on-dark': 'bg-accent text-dark border border-accent hover:bg-primary hover:text-white hover:border-white',
+	'primary-on-light': 'px-1 bg-secondary text-white border border-secondary hover:bg-light hover:text-secondary',
+	'primary-on-dark': 'px-1 bg-accent text-dark border border-accent hover:bg-primary hover:text-white hover:border-white',
 	// SECONDARY
-	'secondary-on-light': 'bg-light text-primary border border-primary hover:text-white hover:bg-primary hover:border-primary',
-	'secondary-on-dark': 'bg-primary text-white border border-white hover:border-light hover:bg-light hover:text-primary',
+	'secondary-on-light': 'px-1 bg-light text-primary border border-primary hover:text-white hover:bg-primary hover:border-primary',
+	'secondary-on-dark': 'px-1 bg-primary text-white border border-white hover:border-light hover:bg-light hover:text-primary',
 // TERTIARY (group + gap added so the arrow can react to hover and sit off the label)
-'tertiary-on-light': 'group gap-0.5 text-primary hover:text-secondary hover:flex-row-reverse',
+'tertiary-on-light': 'group gap-0.5 text-secondary hover:text-primary hover:flex-row-reverse',
 'tertiary-on-dark': 'group gap-0.5 text-white hover:text-light hover:flex-row-reverse',
 };
 
@@ -75,7 +75,7 @@ export default function ButtonLink({
 	}, []);
 
 	const baseStyles =
-	'text-button inline-flex items-center justify-center rounded transition-all duration-300 px-1.25 py-[0.62rem] px-1';
+	'text-button inline-flex items-center justify-center rounded transition-all duration-300 py-[0.62rem] ';
 
 	const combined = clsx(baseStyles, VARIANTS[variant], className);
 	const showArrow = ARROW_VARIANTS.has(variant);
