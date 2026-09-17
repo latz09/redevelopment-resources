@@ -12,12 +12,15 @@ export const FETCH_WHO_WE_ARE_PAGE_QUERY = `{
       heading,
       body
     },
-    summary{
+    purpose{
       sectionLabel,
       heading,
-      intro,
+      body,
       cta{ label },
-      items[]{ icon, description }
+      values[]{
+        heading,
+        body
+      }
     },
     stats{
       image{ asset->{url}, hotspot }

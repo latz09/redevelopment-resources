@@ -26,7 +26,7 @@ const DesktopNavbar = ({ navLinks, logoUrl }) => {
 		>
 			<div className='flex items-center w-full section-x-padding '>
 				<Logo
-					className='w-[13.725rem] h-auto'
+					className='w-[13.725rem] 3xl:w-[16.5rem] h-auto'
 					variant={isDark ? 'white' : 'default'}
 				/>
 				<nav className='flex gap-6 items-center ml-auto'>
@@ -82,7 +82,7 @@ export default DesktopNavbar;
 const DropdownNavItem = ({ link, isDark, onNavClick }) => {
 	const DEV_FORCE_MENU_OPEN = false;
 	return (
-		<div className='relative group'>
+		<div className='relative group '>
 			<button
 				type='button'
 				aria-haspopup='true'
@@ -108,14 +108,14 @@ const DropdownNavItem = ({ link, isDark, onNavClick }) => {
 			</button>
 
 			<div
-				className={`fixed inset-x-0 top-[var(--nav-h)] transition-all duration-200  ${
+				className={`fixed inset-x-0 top-[var(--nav-h)] transition-all duration-200 section-x-padding ${
 					DEV_FORCE_MENU_OPEN
 						? 'opacity-100 visible translate-y-0'
 						: 'opacity-0 invisible -translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0'
 				}`}
 			>
 				<div
-					className={`grid grid-cols-5 backdrop-blur-[13px] section-x-padding py-3 border-y w-full ${
+					className={`grid grid-cols-5 backdrop-blur-[13px]  p-2.5 2xl:p-4 border rounded w-full ${
 						isDark
 							? 'bg-dark/90 border-accent'
 							: 'bg-light/90 border-accent'
@@ -126,7 +126,7 @@ const DropdownNavItem = ({ link, isDark, onNavClick }) => {
 							key={index}
 							href={child.url}
 							onClick={() => onNavClick(child.label, child.url)}
-							className={`group/card flex flex-col p-1.25 border-x-[0.25px] border-y transition duration-300 ${
+							className={`group/card flex flex-col p-1.25 2xl:p-3 border-x-[0.25px] border-y transition duration-300 ${
 								isDark
 									? 'border-accent hover:bg-light group-hover/card:border-light '
 									: 'border-accent hover:bg-primary group-hover/card:border-accent'

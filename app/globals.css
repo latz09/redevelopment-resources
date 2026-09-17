@@ -4,18 +4,9 @@
 
 :root {
 	--nav-h: 12svh;
+	--hero-pt: var(--nav-h);
+	/* --hero-pt: 4rem; */
 
-	/* Default: hero clears the nav automatically. Override this one line
-	   per client if a project wants a different gap — e.g. 6svh, 3rem,
-	   or 0 for full overlap behind the nav. */
-	/* --hero-pt: var(--nav-h); */
-	--hero-pt: 4rem;
-
-	/* Per-project: pick which config color drives typography.
-	   Swap these two lines and every heading/utility below updates.
-	   For this client: dark = Navy (#0F1A25) — matches the guide's
-	   heading/body text color. secondary = Maroon (#8E4D40) — guide gives
-	   no distinct accent/link color, so this defaults to secondary. */
 	--heading-color: theme('colors.dark');
 	--accent-color: theme('colors.secondary');
 }
@@ -83,7 +74,7 @@ body {
 	}
 
 	h1 {
-		font-size: clamp(2.75rem, 7vw, 5rem); /* guide 5rem */
+		font-size: clamp(3.4rem, 7vw, 5rem); /* guide 5rem */
 		letter-spacing: -0.005rem; /* guide */
 	}
 

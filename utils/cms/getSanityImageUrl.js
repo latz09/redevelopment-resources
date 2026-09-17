@@ -55,12 +55,5 @@ export function getResponsiveImageUrls(image, breakpoints = {}) {
 
 // Common image size presets for your site
 export const IMAGE_PRESETS = {
-	hero: { width: 1920, height: 1080, quality: 90 },
-	card: { width: 400, height: 300, quality: 85 },
-	cardWide: { width: 600, height: 400, quality: 85 }, // 3:2 ratio
-	thumbnail: { width: 200, height: 150, quality: 80 },
-	gallery: { width: 800, height: 600, quality: 90 },
-	fullWidth: { width: 1200, height: 800, quality: 90 },
-	square: { width: 600, height: 600, quality: 85 }, // Profile pics, etc.
-	portrait: { width: 600, height: 800, quality: 85 }, // 3:4 ratio
+	hero: { width: 1200, height: 1500, quality: 90 },
 };
