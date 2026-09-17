@@ -2,7 +2,7 @@
 import { Resend } from 'resend';
 import { sanityClient } from '@/utils/cms/sanityConnection';
 import { fetchSeoSettings } from '@/utils/cms/fetchSeoSettings';
-import { clientConfig } from '@/data/config/contact';
+import { contactConfig } from '@/data/config/contact';
 import ClientNotificationEmail from '@/emails/ClientNotificationEmail';
 import AutoResponseEmail from '@/emails/AutoResponseEmail';
 
@@ -15,20 +15,20 @@ export default async function handler(req, res) {
 	}
 
 	// Live name/phone/email from the same Sanity doc the rest of the site
-	// uses. clientConfig's own values are the fallback if seoSettings
+	// uses. contactConfig's own values are the fallback if seoSettings
 	// hasn't been filled out yet.
 	const seo = await fetchSeoSettings();
 	const branding = {
-		...clientConfig.branding,
-		name: seo?.siteName ?? clientConfig.branding.name,
+		...contactConfig.branding,
+		name: seo?.siteName ?? contactConfig.branding.name,
 		contactInfo: {
-			...clientConfig.branding.contactInfo,
-			phone: seo?.phone ?? clientConfig.branding.contactInfo.phone,
-			email: seo?.email ?? clientConfig.branding.contactInfo.email,
+			...contactConfig.branding.contactInfo,
+			phone: seo?.phone ?? contactConfig.branding.contactInfo.phone,
+			email: seo?.email ?? contactConfig.branding.contactInfo.email,
 		},
 	};
 
-	const requiredFields = clientConfig.formFields.filter((f) => f.required);
+	const requiredFields = contactConfig.formFields.filter((f) => f.required);
 	const missingFields = requiredFields.filter((f) => !req.body[f.name]);
 
 	if (missingFields.length > 0) {
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
 	}
 
 	const formData = {};
-	clientConfig.formFields.forEach((field) => {
+	contactConfig.formFields.forEach((field) => {
 		formData[field.name] = req.body[field.name] || 'Not provided';
 	});
 
@@ -61,13 +61,13 @@ export default async function handler(req, res) {
 			from: `${branding.name} Website <forms@mail.latzwebdesign.com>`,
 			to: process.env.CLIENT_EMAIL,
 			replyTo: formData.email,
-			subject: clientConfig.messaging.clientEmailSubject(formData.name),
+			subject: contactConfig.messaging.clientEmailSubject(formData.name),
 			react: (
 				<ClientNotificationEmail
 					branding={branding}
-					fields={clientConfig.formFields}
+					fields={contactConfig.formFields}
 					formData={formData}
-					messaging={clientConfig.messaging}
+					messaging={contactConfig.messaging}
 					timestamp={timestamp}
 				/>
 			),
@@ -75,19 +75,19 @@ export default async function handler(req, res) {
 	];
 
 	// Auto-response to the lead is a paid add-on — only send if the client's paid for it.
-	if (clientConfig.features?.autoResponseEmail) {
+	if (contactConfig.features?.autoResponseEmail) {
 		emailsToSend.push(
 			resend.emails.send({
 				from: `${branding.name} <forms@mail.latzwebdesign.com>`,
 				to: formData.email,
 				replyTo: branding.contactInfo.email,
-				subject: clientConfig.messaging.autoResponseSubject(formData.name),
+				subject: contactConfig.messaging.autoResponseSubject(formData.name),
 				react: (
 					<AutoResponseEmail
 						branding={branding}
-						fields={clientConfig.formFields}
+						fields={contactConfig.formFields}
 						formData={formData}
-						messaging={clientConfig.messaging}
+						messaging={contactConfig.messaging}
 						timestamp={timestamp}
 					/>
 				),
