@@ -4,6 +4,7 @@ import { fetchContent as fc } from '@/utils/cms/fetchContent';
 import { FETCH_HOME_PAGE_QUERY as Q } from '@/data/queries/pages/FETCH_HOME_PAGE_QUERY';
 import PageContainer from '@/components/animations/PageContainer';
 import Hero from '@/components/sections/home-page/Hero';
+import Approach from '@/components/sections/home-page/Approach';
 
 export async function generateMetadata() {
 	return BPM({ slug: '/', query: Q });
@@ -17,10 +18,16 @@ const Home = async () => {
 
 	return (
 		<PageContainer>
-			<Hero data={hero} />
-      <div className='relative z-10 bg-light h-screen'>
-	<p className='text-paragraph p-2'>Placeholder — next section</p>
-</div>
+			{/* Hero + Approach share a parent so Hero's sticky release timing
+			    is bound to just these two — not to whatever else eventually
+			    gets added further down the page. Anything after Approach
+			    goes OUTSIDE this wrapper, as a sibling of it. */}
+			<div>
+				<Hero data={hero} />
+				<Approach data={approach} />
+			</div>
+
+			{/* future sections go here */}
 		</PageContainer>
 	);
 };

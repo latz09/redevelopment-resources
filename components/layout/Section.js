@@ -62,7 +62,7 @@ const Section = ({
 	children,
 	as: Tag = 'section',
 	bg = '',
-	py = 'py-4',
+	py = 'py-5 lg:py-8.75',
 	className = '',
 }) => {
 	return (

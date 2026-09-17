@@ -27,7 +27,7 @@ const Hero = ({ data }) => {
 						{primaryCta?.label && (
 							<ButtonLink
 								href={primaryCta.url || '#'}
-								variant='secondary-on-dark'
+								variant='primary-on-dark'
 								event='Hero - Primary CTA'
 							>
 								{primaryCta.label}
@@ -36,7 +36,7 @@ const Hero = ({ data }) => {
 						{secondaryCta?.label && (
 							<ButtonLink
 								href={secondaryCta.url || '#'}
-								variant='tertiary-on-dark'
+								variant='secondary-on-dark'
 								event='Hero - Secondary CTA'
 							>
 								{secondaryCta.label}
