@@ -130,7 +130,7 @@ body {
 	.text-paragraph {
 		color: var(--heading-color);
 		font-family: var(--font-body);
-		font-size: clamp(0.9rem, 1.3vw, 1rem); /* guide 1rem */
+		font-size: clamp(0.95rem, 1.3vw, 1rem); /* guide 1rem */
 		font-weight: 400;
 		line-height: 1.4; /* 140% */
 		letter-spacing: normal; /* not specified in guide — confirm */
@@ -176,7 +176,7 @@ body {
 	.text-numbers {
 		color: var(--heading-color);
 		font-family: var(--font-heading); /* Cabinet Grotesk, per guide */
-		font-size: clamp(4rem, 8vw, 7.5rem); /* guide 7.5rem */
+		font-size: clamp(6.75rem, 8vw, 7.5rem); /* guide 7.5rem */
 		font-weight: 400; /* guide */
 		line-height: 1; /* 100% */
 		letter-spacing: -0.0075rem; /* guide */

@@ -6,6 +6,8 @@ import PageContainer from '@/components/animations/PageContainer';
 import Hero from '@/components/sections/home-page/Hero';
 import Approach from '@/components/sections/home-page/Approach';
 import Services from '@/components/sections/home-page/Services';
+import ByTheNumbers from '@/components/sections/shared/ByTheNumbers';
+import WhoWeServe from '@/components/sections/home-page/WhoWeServe';
 
 export async function generateMetadata() {
 	return BPM({ slug: '/', query: Q });
@@ -13,23 +15,19 @@ export async function generateMetadata() {
 
 const Home = async () => {
 	const data = await fc(Q);
-	
-	const { hero, approach, services, whoWeServe, siteSettings, testimonials } =
-		data.page ? data.page : {};
+
+	const { hero, approach, services, whoWeServe } = data.page || {};
+	const { siteSettings, testimonials } = data || {};
 
 	return (
 		<PageContainer>
-			{/* Hero + Approach share a parent so Hero's sticky release timing
-			    is bound to just these two — not to whatever else eventually
-			    gets added further down the page. Anything after Approach
-			    goes OUTSIDE this wrapper, as a sibling of it. */}
 			<div>
 				<Hero data={hero} />
 				<Approach data={approach} />
 			</div>
-			<Services data={services} /> 
-
-			{/* future sections go here */}
+			<Services data={services} />
+			<ByTheNumbers data={siteSettings} />
+			<WhoWeServe data={whoWeServe} />
 		</PageContainer>
 	);
 };

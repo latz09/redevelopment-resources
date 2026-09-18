@@ -53,7 +53,7 @@ export function getResponsiveImageUrls(image, breakpoints = {}) {
 	return urls;
 }
 
-// Common image size presets for your site
 export const IMAGE_PRESETS = {
 	hero: { width: 1200, height: 1500, quality: 90 },
+	servicesWindow: { width: 1920, height: 800, quality: 90 },
 };

@@ -17,12 +17,13 @@ export const FETCH_HOME_PAGE_QUERY = `{
    services{
   sectionLabel,
   heading,
-analysisCard{ title, description, url, "iconUrl": icon.asset->url },
+  analysisCard{ title, description, url, "iconUrl": icon.asset->url },
   strategyCard{ title, description, url, "iconUrl": icon.asset->url },
   redevelopmentCard{ title, description, url, "iconUrl": icon.asset->url },
   financingCard{ title, description, url, "iconUrl": icon.asset->url },
   implementationCard{ title, description, url, "iconUrl": icon.asset->url },
-  notSureCard{ title, description, ctaLabel, url }
+  notSureCard{ title, description, ctaLabel, url },
+  servicesImage{ asset->{url}, hotspot }
 },
     whoWeServe{
       sectionLabel,
@@ -49,7 +50,8 @@ analysisCard{ title, description, url, "iconUrl": icon.asset->url },
     }
   },
   "siteSettings": *[_type == "siteSettings" && _id == "siteSettings"][0]{
-    stats[]{ value, label }
+    stats[]{ value, label },
+    statsImage{ asset->{url}, hotspot }
   },
   "testimonials": *[_type == "testimonial" && featured == true] | order(order asc){
     _id,

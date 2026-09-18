@@ -21,7 +21,7 @@ const DesktopNavbar = ({ navLinks, logoUrl }) => {
 	return (
 		<div
 			className={`hidden h-full lg:flex items-center backdrop-blur-lg w-full  ${
-				isDark ? 'bg-dark' : 'bg-light/[44%]'
+				isDark ? 'bg-dark' : 'bg-light'
 			}`}
 		>
 			<div className='flex items-center w-full section-x-padding '>
@@ -115,7 +115,7 @@ const DropdownNavItem = ({ link, isDark, onNavClick }) => {
 				}`}
 			>
 				<div
-					className={`grid grid-cols-5 backdrop-blur-[13px]  p-2.5 2xl:p-4 border rounded w-full ${
+					className={`grid grid-cols-5 backdrop-blur-[13px]  lg:p-1.25 2xl:p-4 border rounded w-full ${
 						isDark
 							? 'bg-dark/90 border-accent'
 							: 'bg-light/90 border-accent'
@@ -126,7 +126,7 @@ const DropdownNavItem = ({ link, isDark, onNavClick }) => {
 							key={index}
 							href={child.url}
 							onClick={() => onNavClick(child.label, child.url)}
-							className={`group/card flex flex-col p-1.25 2xl:p-3 border-x-[0.25px] border-y transition duration-300 ${
+							className={`group/card flex flex-col lg:p-1 2xl:p-3 border-x-[0.25px] border-y transition duration-300 ${
 								isDark
 									? 'border-accent hover:bg-light group-hover/card:border-light '
 									: 'border-accent hover:bg-primary group-hover/card:border-accent'

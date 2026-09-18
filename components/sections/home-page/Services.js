@@ -2,6 +2,7 @@ import Section from '@/components/layout/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Link from 'next/link';
 import { ArrowGrow } from '@/components/ui/ButtonLink';
+import ImageWindow from '@/components/ui/ImageWindow';
 
 const Services = ({ data }) => {
 	const {
@@ -13,8 +14,8 @@ const Services = ({ data }) => {
 		financingCard,
 		implementationCard,
 		notSureCard,
+		servicesImage
 	} = data ? data : {};
-
 	const cards = [
 		analysisCard,
 		strategyCard,
@@ -27,11 +28,14 @@ const Services = ({ data }) => {
 	return (
 		<Section>
 			<SectionHeading label={sectionLabel} heading={heading} as='h2' />
-			<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-dark/50 border border-dark/50 mt-2.5 lg:mt-2'>
+			<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-dark/50 border border-dark/50 mt-2.5 lg:my-4'>
 				{cards.map((card, index) => (
 					<ServiceCard key={index} {...card} />
 				))}
 			</div>
+			<ImageWindow image={servicesImage} />
+			
+			
 		</Section>
 	);
 };

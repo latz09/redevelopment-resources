@@ -112,7 +112,7 @@ module.exports = {
 		// have the real value from the client's guide.
 		borderRadius: {
 			none: '0',
-			DEFAULT: '0.25rem', // PLACEHOLDER — confirm against client guide
+			DEFAULT: '0.25rem', 
 			full: '9999px',
 		},
 
