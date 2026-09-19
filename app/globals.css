@@ -79,7 +79,7 @@ body {
 	}
 
 	h2 {
-		font-size: clamp(2.25rem, 6vw, 4rem); /* guide 4rem */
+		font-size: clamp(2.75rem, 6vw, 4rem); /* guide 4rem */
 		letter-spacing: -0.004rem; /* guide */
 	}
 
@@ -108,7 +108,7 @@ body {
 	.text-overline {
 		color: var(--heading-color);
 		font-family: var(--font-body);
-		font-size: clamp(0.9rem, 1vw, 1rem); /* guide 1rem */
+		font-size: clamp(0.945rem, 1vw, 1rem); /* guide 1rem */
 		font-weight: 500; /* guide */
 		line-height: 1; /* 100% */
 		letter-spacing: -0.001rem; /* guide */
@@ -165,7 +165,7 @@ body {
 	.text-callout {
 		color: var(--heading-color);
 		font-family: var(--font-heading); /* Cabinet Grotesk, per guide */
-		font-size: clamp(1.3rem, 2.5vw, 1.75rem); /* guide 1.75rem */
+		font-size: clamp(1.75rem, 2.5vw, 1.75rem); /* guide 1.75rem */
 		font-weight: 500; /* guide */
 		line-height: 1; /* 100% */
 		letter-spacing: -0.00175rem; /* guide */

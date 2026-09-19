@@ -41,6 +41,10 @@ export const FETCH_HOME_PAGE_QUERY = `{
         image{ asset->{url}, hotspot }
       }
     },
+    testimonialSection{
+      sectionLabel,
+      heading
+    },
     seo{
       title,
       description,
@@ -51,7 +55,14 @@ export const FETCH_HOME_PAGE_QUERY = `{
   },
   "siteSettings": *[_type == "siteSettings" && _id == "siteSettings"][0]{
     stats[]{ value, label },
-    statsImage{ asset->{url}, hotspot }
+    statsImage{ asset->{url}, hotspot },
+    globalCta{
+      sectionLabel,
+      headingLine1,
+      headingLine2,
+      ctaLabel,
+      image{ asset->{url}, hotspot }
+    }
   },
   "testimonials": *[_type == "testimonial" && featured == true] | order(order asc){
     _id,

@@ -8,6 +8,8 @@ import Approach from '@/components/sections/home-page/Approach';
 import Services from '@/components/sections/home-page/Services';
 import ByTheNumbers from '@/components/sections/shared/ByTheNumbers';
 import WhoWeServe from '@/components/sections/home-page/WhoWeServe';
+import TestimonialSection from '@/components/sections/shared/TestimonialSection';
+import GlobalCTA from '@/components/sections/shared/GlobalCTA';
 
 export async function generateMetadata() {
 	return BPM({ slug: '/', query: Q });
@@ -16,8 +18,9 @@ export async function generateMetadata() {
 const Home = async () => {
 	const data = await fc(Q);
 
-	const { hero, approach, services, whoWeServe } = data.page || {};
+	const { hero, approach, services, whoWeServe, testimonialSection } = data.page || {};
 	const { siteSettings, testimonials } = data || {};
+	const { globalCta, ...stats } = siteSettings || {};
 
 	return (
 		<PageContainer>
@@ -26,8 +29,10 @@ const Home = async () => {
 				<Approach data={approach} />
 			</div>
 			<Services data={services} />
-			<ByTheNumbers data={siteSettings} />
+			<ByTheNumbers data={stats} />
 			<WhoWeServe data={whoWeServe} />
+			<TestimonialSection data={testimonialSection} quotes={testimonials} />
+			<GlobalCTA data={globalCta} />
 		</PageContainer>
 	);
 };

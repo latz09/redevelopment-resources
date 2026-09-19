@@ -22,11 +22,11 @@ const Footer = async ({ businessName }) => {
 				as='div'
 				py='pt-5 pb-4'
 				bg='bg-dark'
-				className='relative flex flex-col lg:flex-row lg:flex-wrap lg:items-center lg:justify-between gap-3 lg:gap-x-8 lg:gap-y-3'
+				className='relative flex flex-col xl:flex-row xl:flex-wrap xl:items-center xl:justify-between gap-3 xl:gap-x-8 xl:gap-y-3'
 			>
-				<Logo className='order-1 w-[15.5rem] lg:w-[26rem]' variant='white' />
+				<Logo className='order-1 w-[15.5rem] xl:w-[26rem]' variant='white' />
 
-				<div className='order-2 lg:order-3 lg:basis-full flex flex-col gap-2 w-[90%] lg:w-full max-w-[26.5rem]'>
+				<div className='order-2 xl:order-3 xl:basis-full flex flex-col gap-2 w-[90%] xl:w-full max-w-[26.5rem]'>
 					{footerTagline && (
 						<p className='text-paragraph-lg text-light'>{footerTagline}</p>
 					)}
@@ -74,7 +74,7 @@ const Footer = async ({ businessName }) => {
 					)}
 				</div>
 
-				<nav className='order-3 lg:order-2 grid lg:flex flex-wrap gap-1.25'>
+				<nav className='order-3 xl:order-2 grid xl:flex flex-wrap gap-1.25'>
 					{navLinks.map((link, index) => (
 						<div key={index} className='relative flex flex-col gap-0.5'>
 							{link.children?.length > 0 ? (
@@ -90,7 +90,7 @@ const Footer = async ({ businessName }) => {
 								</Link>
 							)}
 							{link.children?.length > 0 && (
-								<div className='flex flex-col gap-1 lg:absolute lg:top-full lg:left-0 lg:pt-0.5'>
+								<div className='flex flex-col gap-1 xl:absolute xl:top-full xl:left-0 xl:pt-0.5'>
 									{link.children.map((child, childIndex) => (
 										<Link
 											key={childIndex}
@@ -112,7 +112,7 @@ const Footer = async ({ businessName }) => {
 					alt='Wisconsin Woman-Owned Business Enterprise'
 					width={177}
 					height={161}
-					className='absolute right-1 bottom-4 lg:right-[4.0625rem] lg:bottom-[4.0625rem] w-[11.0625rem] h-[10.0625rem]'
+					className='absolute right-1 bottom-4 xl:right-[4.0625rem] xl:bottom-[4.0625rem] w-[11.0625rem] h-[10.0625rem]'
 				/>
 			</Section>
 

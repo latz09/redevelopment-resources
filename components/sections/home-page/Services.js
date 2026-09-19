@@ -26,14 +26,20 @@ const Services = ({ data }) => {
 	].filter(Boolean);
 
 	return (
-		<Section>
+		<Section className="border-t border-dark">
 			<SectionHeading label={sectionLabel} heading={heading} as='h2' />
 			<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-dark/50 border border-dark/50 mt-2.5 lg:my-4'>
 				{cards.map((card, index) => (
 					<ServiceCard key={index} {...card} />
 				))}
 			</div>
-			<ImageWindow image={servicesImage} />
+			<ImageWindow
+	image={servicesImage}
+	alt='Aerial view of a riverside community at sunset'
+	preset='servicesWindow'
+	sizes='(min-width: 1728px) 1728px, 100vw'
+	className='hidden md:block h-[31.25rem] 2xl:h-[37.25rem] rounded mt-2.5 lg:mt-4'
+/>
 			
 			
 		</Section>
