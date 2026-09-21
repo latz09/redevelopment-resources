@@ -1,24 +1,15 @@
-// components/modals/MobileNavbar.js
 'use client';
-import { usePathname } from 'next/navigation';
-
 import { track } from '@vercel/analytics';
 import { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { useIsDarkRoute } from '@/app/hooks/useIsDarkRoute';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import MenuIcon from './MenuIcon';
 import Logo from '../../lib/Logo';
 
-
-
 const EASE = [0.25, 0.46, 0.45, 0.94];
 const PANEL_ID = 'mobile-nav-panel';
 
-// Mobile menu panel colors — edit these to re-theme for a new client.
-// Everything the open panel touches (overlay, panel bg/border, link
-// numbers/text, divider, CTA button) reads from here.
 const PANEL_THEME = {
 	overlay: 'bg-light/75',
 	panelBg: 'bg-light',
@@ -32,10 +23,9 @@ const PANEL_THEME = {
 	ctaHover: 'hover:bg-light hover:text-dark',
 };
 
-const MobileNavbar = ({ navLinks = [], logoUrl }) => {
+const MobileNavbar = ({ navLinks = [], logoUrl, isDark }) => {
 	const [isNavOpen, setIsNavOpen] = useState(false);
 	const [expandedIndex, setExpandedIndex] = useState(null);
-	const isDark = useIsDarkRoute();
 	const isNavigatingAway = useRef(false);
 	const panelRef = useRef(null);
 	const previousFocusRef = useRef(null);
@@ -56,7 +46,6 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 	const mainLinks = navLinks.filter((link) => !link.isButton);
 	const contactLink = navLinks.find((link) => link.isButton);
 
-	// Scroll lock (unchanged)
 	useEffect(() => {
 		if (isNavOpen) {
 			const scrollY = window.scrollY;
@@ -81,15 +70,10 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 		}
 	}, [isNavOpen]);
 
-	// Collapse any open accordion whenever the panel closes, so it doesn't
-	// reopen already-expanded the next time the menu is opened.
 	useEffect(() => {
 		if (!isNavOpen) setExpandedIndex(null);
 	}, [isNavOpen]);
 
-	// Keyboard/focus behavior for the open panel — Escape closes it, focus
-	// moves into the panel on open, and returns to whatever triggered it
-	// (the menu button) on close. Standard modal-dialog behavior.
 	useEffect(() => {
 		if (!isNavOpen) return;
 
@@ -117,11 +101,9 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 		closed: { x: 32, opacity: 0 },
 		open: { x: 0, opacity: 1, transition: { duration: 0.5, ease: EASE } },
 	};
-const pathname = usePathname();
+
 	return (
-			<div
-			data-debug-pathname={pathname}
-			data-debug-isdark={String(isDark)}
+		<div
 			className={`w-full lg:hidden flex items-center justify-between backdrop-blur-lg h-[var(--nav-h)] ${
 				isDark ? 'bg-dark' : 'bg-light'
 			}`}
@@ -208,9 +190,6 @@ const pathname = usePathname();
 													);
 												}
 
-												// Links with children (e.g. Services) have no page of their
-												// own — no Link, no navigation, just an expand/collapse
-												// toggle revealing the real child links beneath it.
 												const isExpanded = expandedIndex === index;
 
 												return (

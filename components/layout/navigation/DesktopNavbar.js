@@ -1,14 +1,9 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-// import { useIsDarkRoute } from '@/hooks/useIsDarkRoute';
-import { useIsDarkRoute } from '@/app/hooks/useIsDarkRoute';
 import { track } from '@vercel/analytics';
 import Logo from '@/components/lib/Logo';
 
-const DesktopNavbar = ({ navLinks, logoUrl }) => {
-	const isDark = useIsDarkRoute();
-	const pathname = usePathname();
+const DesktopNavbar = ({ navLinks, logoUrl, isDark }) => {
 	const mainLinks = navLinks.filter((link) => !link.isButton);
 	const contactLink = navLinks.find((link) => link.isButton);
 
@@ -21,8 +16,6 @@ const DesktopNavbar = ({ navLinks, logoUrl }) => {
 
 	return (
 		<div
-			data-debug-pathname={pathname}
-			data-debug-isdark={String(isDark)}
 			className={`hidden h-full lg:flex items-center backdrop-blur-lg w-full  ${
 				isDark ? 'bg-dark' : 'bg-light'
 			}`}
