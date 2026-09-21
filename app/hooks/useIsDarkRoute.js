@@ -1,23 +1,24 @@
+// hooks/useIsDarkRoute.js
 'use client';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { DARK_NAV_ROUTES } from '@/data/config/navigation';
 
-// usePathname() can briefly disagree with the real browser URL on a hard/
-// first production load — e.g. if a middleware rewrite or edge cache serves
-// an internally-resolved path instead of the literal address-bar URL.
-// window.location.pathname is always the literal URL, so we resync to it
-// once mounted on the client, then let normal client-side navigation keep
-// usePathname() driving things after that.
 export function useIsDarkRoute() {
 	const pathname = usePathname();
 	const [resolvedPath, setResolvedPath] = useState(pathname);
+	const isFirstRun = useRef(true);
 
 	useEffect(() => {
-		setResolvedPath(window.location.pathname);
-	}, []);
-
-	useEffect(() => {
+		if (isFirstRun.current) {
+			// First mount: trust the real browser URL over whatever
+			// usePathname() resolved during hydration.
+			isFirstRun.current = false;
+			setResolvedPath(window.location.pathname);
+			return;
+		}
+		// Any later change to pathname is a real client-side navigation —
+		// usePathname() is reliable at that point, so just follow it.
 		setResolvedPath(pathname);
 	}, [pathname]);
 
