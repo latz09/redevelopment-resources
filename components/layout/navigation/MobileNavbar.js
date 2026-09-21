@@ -120,7 +120,7 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 	return (
 		<div
 			className={`w-full lg:hidden flex items-center justify-between backdrop-blur-lg h-[var(--nav-h)] ${
-				isDark ? 'bg-dark' : 'bg-light/[44%]'
+				isDark ? 'bg-dark' : 'bg-light'
 			}`}
 		>
 			<div className='relative z-20 w-full section-x-padding'>
