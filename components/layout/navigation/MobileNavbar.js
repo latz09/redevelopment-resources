@@ -4,12 +4,12 @@
 import { track } from '@vercel/analytics';
 import { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { usePathname } from 'next/navigation';
+import { useIsDarkRoute } from '@/app/hooks/useIsDarkRoute';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import MenuIcon from './MenuIcon';
 import Logo from '../../lib/Logo';
-import { DARK_NAV_ROUTES } from '@/data/config/navigation';
+
 
 const EASE = [0.25, 0.46, 0.45, 0.94];
 const PANEL_ID = 'mobile-nav-panel';
@@ -33,8 +33,7 @@ const PANEL_THEME = {
 const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 	const [isNavOpen, setIsNavOpen] = useState(false);
 	const [expandedIndex, setExpandedIndex] = useState(null);
-	const pathname = usePathname();
-	const isDark = DARK_NAV_ROUTES.includes(pathname);
+	const isDark = useIsDarkRoute();
 	const isNavigatingAway = useRef(false);
 	const panelRef = useRef(null);
 	const previousFocusRef = useRef(null);

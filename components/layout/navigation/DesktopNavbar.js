@@ -1,13 +1,12 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+// import { useIsDarkRoute } from '@/hooks/useIsDarkRoute';
+import { useIsDarkRoute } from '@/app/hooks/useIsDarkRoute';
 import { track } from '@vercel/analytics';
 import Logo from '@/components/lib/Logo';
-import { DARK_NAV_ROUTES } from '@/data/config/navigation';
 
 const DesktopNavbar = ({ navLinks, logoUrl }) => {
-	const pathname = usePathname();
-	const isDark = DARK_NAV_ROUTES.includes(pathname);
+	const isDark = useIsDarkRoute();
 	const mainLinks = navLinks.filter((link) => !link.isButton);
 	const contactLink = navLinks.find((link) => link.isButton);
 
