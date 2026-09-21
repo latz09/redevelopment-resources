@@ -1,5 +1,6 @@
 // components/modals/MobileNavbar.js
 'use client';
+import { usePathname } from 'next/navigation';
 
 import { track } from '@vercel/analytics';
 import { useEffect, useState, useRef } from 'react';
@@ -9,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import MenuIcon from './MenuIcon';
 import Logo from '../../lib/Logo';
+
 
 
 const EASE = [0.25, 0.46, 0.45, 0.94];
@@ -115,9 +117,11 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 		closed: { x: 32, opacity: 0 },
 		open: { x: 0, opacity: 1, transition: { duration: 0.5, ease: EASE } },
 	};
-
+const pathname = usePathname();
 	return (
-		<div
+			<div
+			data-debug-pathname={pathname}
+			data-debug-isdark={String(isDark)}
 			className={`w-full lg:hidden flex items-center justify-between backdrop-blur-lg h-[var(--nav-h)] ${
 				isDark ? 'bg-dark' : 'bg-light'
 			}`}
