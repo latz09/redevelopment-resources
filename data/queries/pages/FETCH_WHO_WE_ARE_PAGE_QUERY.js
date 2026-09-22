@@ -22,9 +22,6 @@ export const FETCH_WHO_WE_ARE_PAGE_QUERY = `{
         body
       }
     },
-    stats{
-      image{ asset->{url}, hotspot }
-    },
     team{
       sectionLabel,
       heading,
@@ -56,6 +53,14 @@ export const FETCH_WHO_WE_ARE_PAGE_QUERY = `{
     }
   },
   "siteSettings": *[_type == "siteSettings" && _id == "siteSettings"][0]{
-    stats[]{ value, label }
+    stats[]{ value, label },
+    statsImage{ asset->{url}, hotspot },
+    globalCta{
+      sectionLabel,
+      headingLine1,
+      headingLine2,
+      ctaLabel,
+      image{ asset->{url}, hotspot }
+    }
   }
 }`

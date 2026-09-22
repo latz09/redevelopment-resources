@@ -10,7 +10,7 @@ const WhoWeServe = ({ data }) => {
 	return (
 		<Section bg='bg-dark ' py='0' className='pb-5 lg:pb-8.75 space-y-2.5 lg:space-y-4'>
 			<SectionHeading onDark={true} label={sectionLabel} heading={heading} />
-			<div className="grid lg:grid-cols-2 gap-[1px] bg-light border border-light">
+			<div className="grid lg:grid-cols-2 gap-[1px] bg-accent/50 border border-accent/50">
 				<SectorCard data={publicSectorCard} alt='State capitol building surrounded by autumn trees' />
 				<SectorCard data={privateSectorCard} alt='Hands reviewing architectural floor plans at a table' />
 			</div>

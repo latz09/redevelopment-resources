@@ -14,7 +14,7 @@ const Services = ({ data }) => {
 		financingCard,
 		implementationCard,
 		notSureCard,
-		servicesImage
+		servicesImage,
 	} = data ? data : {};
 	const cards = [
 		analysisCard,
@@ -26,7 +26,7 @@ const Services = ({ data }) => {
 	].filter(Boolean);
 
 	return (
-		<Section className="border-t border-dark">
+		<Section className='border-t border-dark/50'>
 			<SectionHeading label={sectionLabel} heading={heading} as='h2' />
 			<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-dark/50 border border-dark/50 mt-2.5 lg:my-4'>
 				{cards.map((card, index) => (
@@ -34,14 +34,12 @@ const Services = ({ data }) => {
 				))}
 			</div>
 			<ImageWindow
-	image={servicesImage}
-	alt='Aerial view of a riverside community at sunset'
-	preset='servicesWindow'
-	sizes='(min-width: 1728px) 1728px, 100vw'
-	className='hidden md:block h-[31.25rem] 2xl:h-[37.25rem] rounded mt-2.5 lg:mt-4'
-/>
-			
-			
+				image={servicesImage}
+				alt='Aerial view of a riverside community at sunset'
+				preset='servicesWindow'
+				sizes='(min-width: 1728px) 1728px, 100vw'
+				className='hidden md:block h-[31.25rem] 2xl:h-[37.25rem] rounded mt-2.5 lg:mt-4'
+			/>
 		</Section>
 	);
 };

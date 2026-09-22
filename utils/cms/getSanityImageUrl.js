@@ -52,9 +52,12 @@ export function getResponsiveImageUrls(image, breakpoints = {}) {
 
 	return urls;
 }
-
 export const IMAGE_PRESETS = {
 	hero: { width: 1200, height: 1500, quality: 90 },
 	servicesWindow: { width: 1920, height: 800, quality: 90 },
 	globalCtaWindow: { width: 960, height: 1440, quality: 90 },
+	whoWeAreHeroGridOne: { width: 965, height: 820, quality: 90 },   // 193:164
+	whoWeAreHeroGridTwo: { width: 690, height: 860, quality: 90 },   // 69:86
+	whoWeAreHeroGridThree: { width: 1030, height: 750, quality: 90 }, // 103:75
+	teamMemberPhoto: { width: 1000, height: 985, quality: 90 }, // 67:66, near-square
 };

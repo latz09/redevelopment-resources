@@ -6,7 +6,7 @@ import StatNumber from '@/components/ui/StatNumber';
 const ByTheNumbers = ({ data }) => {
 	return (
 		<Section bg='bg-dark'>
-			<div className='grid lg:grid-cols-2 gap-4 border-b border-light pb-5 lg:pb-8.75'>
+			<div className='grid lg:grid-cols-2 gap-4 border-b border-accent/50 pb-5 lg:pb-8.75'>
 				<div className='relative h-[22rem] lg:h-[37.5rem]'>
 					<SanityImage
 						image={data?.statsImage}
@@ -25,7 +25,7 @@ const ByTheNumbers = ({ data }) => {
 					/>
 					<div className='grid lg:grid-cols-2 gap-y-2 gap-x-1.25'>
 						{data?.stats?.map((stat, index) => (
-							<div key={index} className='border-t border-light pt-1.25 space-y-1'>
+							<div key={index} className='border-t border-accent pt-1.25 space-y-1'>
 								<p className='text-numbers text-light'>
 									{index === 0 ? <StatNumber value={stat.value} /> : stat.value}
 								</p>
