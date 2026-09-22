@@ -60,4 +60,7 @@ export const IMAGE_PRESETS = {
 	whoWeAreHeroGridTwo: { width: 690, height: 860, quality: 90 },   // 69:86
 	whoWeAreHeroGridThree: { width: 1030, height: 750, quality: 90 }, // 103:75
 	teamMemberPhoto: { width: 1000, height: 985, quality: 90 }, // 67:66, near-square
+	whoWeServeHero: { width: 1100, height: 1253, quality: 90 }, // 36:41
+	sectorSectionImage: { width: 1920, height: 755, quality: 90 }, // 328:129, lg+
+sectorSectionImageMobile: { width: 1200, height: 1000, quality: 90 }, // 6:5, below lg
 };
