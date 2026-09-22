@@ -23,4 +23,4 @@ const WhoWeAre = async () => {
 
 export default WhoWeAre
 
-export const revalidate = 10
+export const dynamic = 'force-dynamic';

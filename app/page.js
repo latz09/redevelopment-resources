@@ -39,4 +39,4 @@ const Home = async () => {
 
 export default Home;
 
-export const revalidate = 10;
+export const dynamic = 'force-dynamic';
