@@ -4,7 +4,7 @@ import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import MobileNavbar from './MobileNavbar';
 import DesktopNavbar from './DesktopNavbar';
 
-const StickyNav = ({ navLinks, logoUrl, isDark }) => {
+const StickyNav = ({ navLinks, logoUrl }) => {
 	const [hidden, setHidden] = useState(false);
 	const threshold = useRef(0);
 	const { scrollY } = useScroll();
@@ -34,8 +34,8 @@ const StickyNav = ({ navLinks, logoUrl, isDark }) => {
 			variants={{ visible: { y: 0 }, hidden: { y: '-100%' } }}
 			transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
 		>
-			<MobileNavbar navLinks={navLinks} logoUrl={logoUrl} isDark={isDark} />
-			<DesktopNavbar navLinks={navLinks} logoUrl={logoUrl} isDark={isDark} />
+			<MobileNavbar navLinks={navLinks} logoUrl={logoUrl} />
+			<DesktopNavbar navLinks={navLinks} logoUrl={logoUrl} />
 		</motion.nav>
 	);
 };
