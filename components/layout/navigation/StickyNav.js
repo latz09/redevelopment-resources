@@ -29,7 +29,7 @@ const StickyNav = ({ navLinks, logoUrl }) => {
 
 	return (
 		<motion.nav
-			className='fixed top-0 left-0 w-full z-50 flex items-center h-[var(--nav-h)] bg-dark'
+			className='fixed top-0 left-0 w-full z-50 flex items-center h-[var(--nav-h)] '
 			animate={hidden ? 'hidden' : 'visible'}
 			variants={{ visible: { y: 0 }, hidden: { y: '-100%' } }}
 			transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
