@@ -23,12 +23,12 @@ const THEME = {
 	},
 };
 
-const SectorSection = ({ data, theme = 'dark' }) => {
+const SectorSection = ({ data, theme = 'dark', id = '' }) => {
 	const { heading, intro, sectionImage, rows } = data || {};
 	const t = THEME[theme] || THEME.dark;
 
 	return (
-		<Section bg={`${t.bg} relative z-10`} className='space-y-2.5 lg:space-y-4'>
+		<Section bg={`${t.bg} relative z-10`} className='space-y-2.5 lg:space-y-4' id={id}>
 			<div className='grid lg:grid-cols-2 gap-1.5 lg:gap-6.5 items-start'>
 				<h2 className={t.heading}>{heading}</h2>
 				<p className={`text-paragraph-lg ${t.body}`}>{intro}</p>
@@ -89,7 +89,7 @@ const SectorRow = ({ row, sectionHeading, theme }) => {
 				<p className={`text-paragraph ${t.body}`}>{body}</p>
 				{cta?.label && (
 					<ButtonLink
-						href={href}
+						href={'/'}
 						variant={t.button}
 						event={`Who We Serve - ${heading}`}
 					>

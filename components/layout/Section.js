@@ -64,9 +64,10 @@ const Section = ({
 	bg = '',
 	py = 'py-5 lg:py-8.75',
 	className = '',
+	id = '',
 }) => {
 	return (
-		<Tag className={bg}>
+		<Tag className={bg} id={id}>
 			<div className={`section-x-padding ${py} ${className}`}>{children}</div>
 		</Tag>
 	);

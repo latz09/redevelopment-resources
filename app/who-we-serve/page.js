@@ -22,6 +22,7 @@ const WhoWeServe = async () => {
 				<WhoWeServeHero data={hero} />
 				<SectorSection
 					theme='dark'
+					id='public-sector'
 					data={{
 						heading: publicSector?.heading,
 						intro: publicSector?.intro,
@@ -32,6 +33,7 @@ const WhoWeServe = async () => {
 			</div>
 			<SectorSection
 				theme='light'
+				id='private-sector'
 				data={{
 					heading: privateSector?.heading,
 					intro: privateSector?.intro,

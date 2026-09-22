@@ -26,7 +26,7 @@ const Services = ({ data }) => {
 	].filter(Boolean);
 
 	return (
-		<Section className='border-t border-dark/50'>
+		<Section id='services' className='border-t border-dark/50'>
 			<SectionHeading label={sectionLabel} heading={heading} as='h2' />
 			<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-dark/50 border border-dark/50 mt-2.5 lg:my-4'>
 				{cards.map((card, index) => (

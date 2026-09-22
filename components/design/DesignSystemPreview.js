@@ -34,14 +34,7 @@ const DesignSystemPreview = () => {
 				))}
 			</div>
 
-			{activeTab === 'buttons' && (
-				<p className='text-center pb-2'>
-					Choose button type at{' '}
-					<Link href='/design/buttons'>
-						<code className='text-primary font-black underline'>/design/buttons</code>
-					</Link>
-				</p>
-			)}
+			
 
 			{ActiveComponent && <ActiveComponent />}
 		</div>

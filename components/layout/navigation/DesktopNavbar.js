@@ -1,5 +1,7 @@
 'use client';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useIsDarkRoute } from '@/app/hooks/useIsDarkRoute';
 import { track } from '@vercel/analytics';
 import Logo from '@/components/lib/Logo';
@@ -78,19 +80,41 @@ const DesktopNavbar = ({ navLinks, logoUrl }) => {
 export default DesktopNavbar;
 
 const DropdownNavItem = ({ link, isDark, onNavClick }) => {
-	const DEV_FORCE_MENU_OPEN = false;
+	const [open, setOpen] = useState(false);
+	const pathname = usePathname();
+
+	// Belt-and-suspenders: closes on any route change, not just a click
+	// inside this specific dropdown (back/forward nav, programmatic
+	// navigation elsewhere, etc.)
+	useEffect(() => {
+		setOpen(false);
+	}, [pathname]);
+
+	const handleChildClick = (label, url) => {
+		onNavClick(label, url);
+		setOpen(false);
+	};
+
 	return (
-		<div className='relative group '>
+		<div
+			className='relative'
+			onMouseEnter={() => setOpen(true)}
+			onMouseLeave={() => setOpen(false)}
+		>
 			<button
 				type='button'
 				aria-haspopup='true'
-				className={`flex items-center gap-0.25 text-button font-[500] transition-all duration-200 cursor-pointer group-hover:underline group-hover:underline-offset-2 ${
+				aria-expanded={open}
+				onClick={() => setOpen((o) => !o)}
+				className={`flex items-center gap-0.25 text-button font-[500] transition-all duration-200 cursor-pointer hover:underline hover:underline-offset-2 ${
 					isDark ? 'text-light' : ''
 				}`}
 			>
 				{link.label}
 				<svg
-					className='w-[0.75rem] h-[0.75rem] transition-transform duration-200 group-hover:rotate-180'
+					className={`w-[0.75rem] h-[0.75rem] transition-transform duration-200 ${
+						open ? 'rotate-180' : ''
+					}`}
 					viewBox='0 0 12 8'
 					fill='none'
 					xmlns='http://www.w3.org/2000/svg'
@@ -107,9 +131,9 @@ const DropdownNavItem = ({ link, isDark, onNavClick }) => {
 
 			<div
 				className={`fixed inset-x-0 top-[var(--nav-h)] transition-all duration-200 section-x-padding ${
-					DEV_FORCE_MENU_OPEN
+					open
 						? 'opacity-100 visible translate-y-0'
-						: 'opacity-0 invisible -translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0'
+						: 'opacity-0 invisible -translate-y-1'
 				}`}
 			>
 				<div
@@ -123,7 +147,7 @@ const DropdownNavItem = ({ link, isDark, onNavClick }) => {
 						<Link
 							key={index}
 							href={child.url}
-							onClick={() => onNavClick(child.label, child.url)}
+							onClick={() => handleChildClick(child.label, child.url)}
 							className={`group/card flex flex-col lg:p-1 2xl:p-3 border-x-[0.25px] border-y transition duration-300 ${
 								isDark
 									? 'border-accent hover:bg-light group-hover/card:border-light '

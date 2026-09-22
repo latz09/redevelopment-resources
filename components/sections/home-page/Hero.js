@@ -26,7 +26,7 @@ const Hero = ({ data }) => {
 					<div className='flex flex-wrap gap-1 mt-1.5'>
 						{primaryCta?.label && (
 							<ButtonLink
-								href={primaryCta.url || '#'}
+								href={'/#services'}
 								variant='primary-on-dark'
 								event='Hero - Primary CTA'
 							>
@@ -35,7 +35,7 @@ const Hero = ({ data }) => {
 						)}
 						{secondaryCta?.label && (
 							<ButtonLink
-								href={secondaryCta.url || '#'}
+								href={'/our-projects'}
 								variant='secondary-on-dark'
 								event='Hero - Secondary CTA'
 							>
