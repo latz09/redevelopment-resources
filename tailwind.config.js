@@ -13,12 +13,12 @@ module.exports = {
 		// original guide file before shipping. Maroon in particular had no
 		// leading '#' in the source image.
 		colors: {
-			primary: '#0F1A25', // Navy — brand's primary IS the dark neutral (shares hex with `dark` below)
+			primary: '#0F1A25', // Navy — brand's primary IS the dark neutral (shares hex with `dark` for backgrounds)
 			secondary: '#8E4D40', // Maroon
-			accent: '#ACA48A', // Sage Gray
+			accent: '#ACA48A', // Sage Gray - mostly borders at 50% opacity
 			tertiary: '#D3D3D3', // white
 			dark: '#0F1A25', // Navy (same as primary)
-			light: '#E9DFC9', // Cream
+			light: '#E9DFC9', // Cream for backgrounds
 			transparent: 'transparent',
 			current: 'currentColor',
 			white: '#F6F1F1',
