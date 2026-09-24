@@ -1,3 +1,4 @@
+// app/our-projects/[slug]/page.js
 import { buildPageMetadata as BPM } from '@/utils/seo/buildPageMetadata'
 import { fetchContent as fc } from '@/utils/cms/fetchContent'
 import { sanityClient } from '@/utils/cms/sanityConnection'
@@ -5,6 +6,7 @@ import { FETCH_CASE_STUDY_QUERY as Q } from '@/data/queries/caseStudy/FETCH_CASE
 import { FETCH_CASE_STUDY_SLUGS_QUERY as SLUGS_Q } from '@/data/queries/caseStudy/FETCH_CASE_STUDY_SLUGS_QUERY'
 import PageContainer from '@/components/animations/PageContainer'
 import Section from '@/components/layout/Section'
+import Link from 'next/link'
 
 export async function generateStaticParams() {
   // Build-time, no request scope — bypass fetchContent (it calls draftMode()).
@@ -22,8 +24,16 @@ const CaseStudy = async ({ params }) => {
   const data = await fc(Q, { slug })
   return (
     <PageContainer>
-      <Section className="h-[80vh] grid place-items-center">
-        <div>{data?.title}</div>
+      <Section className="gap-2 grid place-items-center text-center">
+        <h1 className="mb-2">{data?.title}</h1>
+        <h5>Related Services</h5>
+        <ul className="space-y-0.75">
+          {data?.relatedServices?.map((service) => (
+            <li key={service.slug} className="rounded bg-dark text-light px-2 py-0.75">
+              <Link href={service.slug}>{service.title}</Link>
+            </li>
+          ))}
+        </ul>
       </Section>
     </PageContainer>
   )

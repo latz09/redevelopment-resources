@@ -73,7 +73,7 @@ const SectorSection = ({ data, theme = 'dark', id = '' }) => {
 const SectorRow = ({ row, sectionHeading, theme }) => {
 	const { heading, body, cta } = row || {};
 	const t = THEME[theme] || THEME.dark;
-	const href = cta?.caseStudy?.slug ? `/projects/${cta.caseStudy.slug}` : '#';
+	const href = cta?.caseStudy?.slug ? `/our-projects/${cta.caseStudy.slug}` : null;
 
 	return (
 		<>
@@ -87,9 +87,9 @@ const SectorRow = ({ row, sectionHeading, theme }) => {
 			</div>
 			<div className={`${t.bg} p-1.5 lg:p-2.5 space-y-1.5`}>
 				<p className={`text-paragraph ${t.body}`}>{body}</p>
-				{cta?.label && (
+				{cta?.label && href && (
 					<ButtonLink
-						href={'/'}
+						href={href}
 						variant={t.button}
 						event={`Who We Serve - ${heading}`}
 					>

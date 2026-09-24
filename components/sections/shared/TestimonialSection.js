@@ -1,13 +1,34 @@
 // components/sections/shared/TestimonialSection.js
 'use client';
 
+import { truncateQuote } from '@/lib/text/truncateQuote';
 import { useEffect, useState } from 'react';
-import { AnimatePresence, animate, motion, useMotionValue, useReducedMotion, useTransform } from 'framer-motion';
+import {
+	AnimatePresence,
+	animate,
+	motion,
+	useMotionValue,
+	useReducedMotion,
+	useTransform,
+} from 'framer-motion';
 import SplitContent from '@/components/layout/SplitContent';
 import SectionHeading from '@/components/ui/SectionHeading';
 
 const stripQuoteMarks = (str) =>
 	str?.trim().replace(/^["']+|["']+$/g, '') ?? '';
+
+// Strip stray quote marks first, then cap the length. The hidden height-lock
+// stack and the visible quote both use this so they always match.
+const cleanQuote = (str) => truncateQuote(stripQuoteMarks(str));
+
+// "Former Mayor, Elkhorn, WI" — skips the comma if either piece is missing
+const attribution = (q) => [q?.title, q?.location].filter(Boolean).join(', ');
+
+// Swipe thresholds — same shape as the drag-to-scroll carousels elsewhere in
+// this codebase (GalleryCarousel, SuccessOnWater): a small distance OR a
+// fast flick either counts as a deliberate swipe.
+const SWIPE_DISTANCE = 60;
+const SWIPE_VELOCITY = 400;
 
 // Counts up/down to `value` instead of sliding — used for the "01 / 03" index,
 // which shouldn't share the quote's enter/exit slide animation.
@@ -55,6 +76,18 @@ const TestimonialSection = ({ data, quotes }) => {
 		setIndex((i) => (i + 1) % total);
 	};
 
+	// Dragging the quote itself swipes to the next/prev testimonial —
+	// right-to-left (negative offset) goes next, left-to-right goes prev.
+	const onDragEnd = (_, info) => {
+		if (total <= 1) return;
+		const { offset, velocity } = info;
+		if (offset.x <= -SWIPE_DISTANCE || velocity.x <= -SWIPE_VELOCITY) {
+			next();
+		} else if (offset.x >= SWIPE_DISTANCE || velocity.x >= SWIPE_VELOCITY) {
+			prev();
+		}
+	};
+
 	const variants = {
 		enter: (dir) => ({ opacity: 0, x: reduceMotion ? 0 : dir > 0 ? 24 : -24 }),
 		center: { opacity: 1, x: 0 },
@@ -86,19 +119,19 @@ const TestimonialSection = ({ data, quotes }) => {
 						{` / ${String(total).padStart(2, '0')}`}
 					</p>
 
-					{/* Quote */}
-					<div className='relative mb-4'>
+					{/* Quote — draggable. touchAction: 'pan-y' lets the page still
+					    scroll vertically on touch while this element claims
+					    horizontal drag for the swipe. */}
+					<div className='relative mb-1.25 lg:mb-4 overflow-hidden'>
+						{/* height lock stack, unchanged */}
 						<div
 							className='grid invisible pointer-events-none'
 							aria-hidden='true'
 						>
 							{quotes.map((quote) => (
-								<div
-									key={quote._id}
-									className='col-start-1 row-start-1'
-								>
-									<p className='text-'>
-										&ldquo;{stripQuoteMarks(quote.quote)}d\&rdquo;
+								<div key={quote._id} className='col-start-1 row-start-1'>
+									<p className='text-callout'>
+										&ldquo;{cleanQuote(quote.quote)}&rdquo;
 									</p>
 								</div>
 							))}
@@ -112,25 +145,36 @@ const TestimonialSection = ({ data, quotes }) => {
 								animate='center'
 								exit='exit'
 								transition={transition}
-								className='absolute inset-0'
+								drag={total > 1 ? 'x' : false}
+								dragConstraints={{ left: 0, right: 0 }}
+								dragElastic={0}
+								dragMomentum={false}
+								onDragEnd={onDragEnd}
+								style={{ touchAction: 'pan-y' }}
+								className='absolute inset-0 cursor-grab active:cursor-grabbing select-none'
 							>
-							<p className='text-callout '>&ldquo;{stripQuoteMarks(current.quote)}&rdquo;</p>
+								<p className='text-callout'>
+									&ldquo;{cleanQuote(current.quote)}&rdquo;
+								</p>
 							</motion.div>
 						</AnimatePresence>
 					</div>
 
 					{/* Attribution */}
-					<div className='relative mt-3 lg:mt-0'>
+					<div className='relative mt-1.25 lg:mt-0'>
+						{/* Same type classes as the visible layer below, so the
+						    reserved height matches what's actually rendered. */}
 						<div
-							className='grid invisible pointer-events-none '
+							className='grid invisible pointer-events-none'
 							aria-hidden='true'
 						>
 							{quotes.map((quote) => (
-								<div key={quote._id} className='col-start-1  row-start-1'>
-									<p className='text-caption font-semibold'>{quote.name}</p>
-									<p className='text-caption'>
-										{quote.title}, {quote.location}
-									</p>
+								<div
+									key={quote._id}
+									className='col-start-1 row-start-1 space-y-0.5'
+								>
+									<p className='text-paragraph-lg'>{quote.name}</p>
+									<p className='text-paragraph'>{attribution(quote)}</p>
 								</div>
 							))}
 						</div>
@@ -145,10 +189,8 @@ const TestimonialSection = ({ data, quotes }) => {
 								transition={{ ...transition, delay: reduceMotion ? 0 : 0.06 }}
 								className='absolute inset-0 space-y-0.5'
 							>
-								<p className='text-paragraph-lg '>{current.name}</p>
-								<p className='text-paragraph'>
-									{current.title}, {current.location}
-								</p>
+								<p className='text-paragraph-lg'>{current.name}</p>
+								<p className='text-paragraph'>{attribution(current)}</p>
 							</motion.div>
 						</AnimatePresence>
 					</div>
@@ -160,7 +202,13 @@ const TestimonialSection = ({ data, quotes }) => {
 
 export default TestimonialSection;
 
-const Arrows = ({ onPrev, onNext, canPrev = true, canNext = true, className }) => {
+const Arrows = ({
+	onPrev,
+	onNext,
+	canPrev = true,
+	canNext = true,
+	className,
+}) => {
 	return (
 		<div className={`flex ${className || ''}`}>
 			<motion.button

@@ -5,7 +5,7 @@ export const FETCH_CASE_STUDY_QUERY = `*[_type == "caseStudy" && slug.current ==
   location,
   heroImage{ asset->{url}, hotspot },
   quickFacts[]{
-    icon,
+    icon->{ name, "url": image.asset->url },
     text
   },
   story[]{

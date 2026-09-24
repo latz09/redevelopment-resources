@@ -24,6 +24,10 @@ export const FETCH_OUR_PROJECTS_PAGE_QUERY = `{
         heroImage{ asset->{url}, hotspot }
       }
     },
+    testimonialSection{
+      sectionLabel,
+      heading
+    },
     seo{
       title,
       description,
@@ -32,23 +36,26 @@ export const FETCH_OUR_PROJECTS_PAGE_QUERY = `{
       noIndex
     }
   },
+  "siteSettings": *[_type == "siteSettings" && _id == "siteSettings"][0]{
+    globalCta{
+      sectionLabel,
+      headingLine1,
+      headingLine2,
+      ctaLabel,
+      image{ asset->{url}, hotspot }
+    }
+  },
   "caseStudies": *[_type == "caseStudy"] | order(order asc){
     _id,
     title,
     "slug": slug.current,
     location,
-    heroImage{ asset->{url}, hotspot }
-  },
-  "modalTestimonials": *[_type == "testimonial" && !defined(linkedCaseStudy)] | order(order asc){
-    _id,
-    quote,
-    name,
-    title,
-    location
+    heroImage{ asset->{url}, hotspot },
+    relatedServices[]->{ title }
   },
   "testimonials": *[_type == "testimonial" && featured == true] | order(order asc){
     _id,
-    quote,
+    "quote": coalesce(pullQuote, quote),
     name,
     title,
     location

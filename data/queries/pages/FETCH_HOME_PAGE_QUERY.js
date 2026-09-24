@@ -14,14 +14,14 @@ export const FETCH_HOME_PAGE_QUERY = `{
       heading,
       body
     },
-   services{
+services{
   sectionLabel,
   heading,
-  analysisCard{ title, description, url, "iconUrl": icon.asset->url },
-  strategyCard{ title, description, url, "iconUrl": icon.asset->url },
-  redevelopmentCard{ title, description, url, "iconUrl": icon.asset->url },
-  financingCard{ title, description, url, "iconUrl": icon.asset->url },
-  implementationCard{ title, description, url, "iconUrl": icon.asset->url },
+  analysisCard{ title, description, url, "iconUrl": icon->image.asset->url },
+  strategyCard{ title, description, url, "iconUrl": icon->image.asset->url },
+  redevelopmentCard{ title, description, url, "iconUrl": icon->image.asset->url },
+  financingCard{ title, description, url, "iconUrl": icon->image.asset->url },
+  implementationCard{ title, description, url, "iconUrl": icon->image.asset->url },
   notSureCard{ title, description, ctaLabel, url },
   servicesImage{ asset->{url}, hotspot }
 },
@@ -66,7 +66,7 @@ export const FETCH_HOME_PAGE_QUERY = `{
   },
   "testimonials": *[_type == "testimonial" && featured == true] | order(order asc){
     _id,
-    quote,
+   "quote": coalesce(pullQuote, quote),
     name,
     title,
     location

@@ -1,9 +1,9 @@
-// app/services/analysis/page.js
+// app/services/analysis/page.js  (same shape for strategy/redevelopment/financing/implementation)
 import { buildPageMetadata as BPM } from '@/utils/seo/buildPageMetadata'
 import { fetchContent as fc } from '@/utils/cms/fetchContent'
 import { FETCH_ANALYSIS_PAGE_QUERY as Q } from '@/data/queries/pages/FETCH_ANALYSIS_PAGE_QUERY'
 import PageContainer from '@/components/animations/PageContainer'
-import Section from '@/components/layout/Section'
+import ServicePageTemplate from '@/components/sections/services/ServicePageTemplate'
 
 export async function generateMetadata() {
   return BPM({ slug: '/services/analysis', query: Q })
@@ -14,9 +14,7 @@ const Analysis = async () => {
 
   return (
     <PageContainer>
-      <Section className="h-[80vh] grid place-items-center">
-        <div>{data?.page?.title}</div>
-      </Section>
+      <ServicePageTemplate data={data} />
     </PageContainer>
   )
 }
