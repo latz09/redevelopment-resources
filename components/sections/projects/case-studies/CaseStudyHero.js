@@ -17,7 +17,7 @@ const CaseStudyHero = ({ data }) => {
 				</p>
 			</div>
 
-			<div className='relative aspect-[3/2] lg:h-[29rem] lg:aspect-auto lg:w-full overflow-hidden pt-2.25 lg:pt-5 ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] lg:mx-0 rounded-none lg:rounded'>
+			<div className='relative aspect-[3/2] lg:h-[29rem] 3xl:h-[35rem] lg:aspect-auto lg:w-full overflow-hidden pt-2.25 lg:pt-5 ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] lg:mx-0 rounded-none lg:rounded'>
 				{heroImage ? (
 					<>
 						<SanityImage

@@ -5,7 +5,7 @@ export const FETCH_ANALYSIS_PAGE_QUERY = `{
     hero{
       headline,
       subheadline,
-      heroImage{ asset->{url}, hotspot }
+      heroImage{ asset->{url}, hotspot, alt }
     },
     overview{
       sectionLabel,
