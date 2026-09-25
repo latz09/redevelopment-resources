@@ -13,12 +13,14 @@ const ProjectsOverview = ({ data }) => {
 	return (
 		<SplitContent
 			left={
-				<SectionHeading
-					label={sectionLabel}
-					heading={heading}
-					as='h2'
-					onDark={false}
-				/>
+				<div>
+					<SectionHeading
+						label={sectionLabel}
+						heading={heading}
+						as='h2'
+						onDark={false}
+					/>
+				</div>
 			}
 			right={
 				paragraphs.length > 0 && (

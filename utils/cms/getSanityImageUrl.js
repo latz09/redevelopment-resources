@@ -65,4 +65,6 @@ export const IMAGE_PRESETS = {
 	sectorSectionImageMobile: { width: 1200, height: 1000, quality: 90 }, // 6:5, below lg,
 	workShowcase: { width: 1178, height: 786, quality: 90 },
 	flagshipImage: { width: 1968, height: 696, quality: 90 },
+	caseStudyHero: { width: 1600, height: 566, quality: 90 }, // 82:29 banner
+	caseStudyHeroMobile: { width: 900, height: 600, quality: 90 }, // 3:2
 };

@@ -23,6 +23,7 @@ body {
 	@apply bg-light font-default;
 	@apply antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	overflow-x: hidden;
 }
 
 /* :focus-visible only fires for keyboard/programmatic focus, not mouse
@@ -96,14 +97,16 @@ body {
 	h5 {
 		font-size: clamp(1.25rem, 3vw, 1.75rem); /* guide 1.75rem */
 		letter-spacing: -0.00175rem; /* guide */
+		line-height: 1.2; /* 120% */
 	}
-
-
+	h6 {
+		font-size: clamp(1.15rem, 3vw, 1.55rem); /* guide 1.75rem */
+		letter-spacing: -0.00175rem; /* guide */
+		line-height: 1.2; /* 120% */
+	}
 }
 
 @layer components {
-
-
 	/* Guide "Overline Text". */
 	.text-overline {
 		color: var(--heading-color);
@@ -113,8 +116,6 @@ body {
 		line-height: 1; /* 100% */
 		letter-spacing: -0.001rem; /* guide */
 	}
-
-
 
 	/* Guide "Paragraph Large". */
 	.text-paragraph-lg {
@@ -145,8 +146,6 @@ body {
 		line-height: 1.4; /* 140% */
 		letter-spacing: normal; /* not specified in guide — confirm */
 	}
-
-	
 
 	/* Guide "Button Text" — uses the HEADING face (Cabinet Grotesk), not
 	   the body face. This is a deliberate deviation from the usual
