@@ -26,7 +26,7 @@ const Hero = ({ data }) => {
 				    where there's no neighbor to hide the overflow in */}
 				<SectionGraphic
 					variant='flag'
-				className='absolute z-0 top-0 -left-1.5 md:left-0 h-full w-auto text-light/10 pointer-events-none select-none'
+				className='absolute z-0 top-0 -left-0 md:left-0 h-full w-auto text-light/10 pointer-events-none select-none'
 				/>
 
 				<div className='relative z-10 max-w-[36rem] '>

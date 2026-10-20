@@ -7,12 +7,18 @@ const GRAPHIC_CLASSNAMES = {
 	flag: 'hidden lg:block absolute z-0 top-0 -left-1.5 md:left-0 h-full w-auto text-secondary/10 pointer-events-none select-none',
 };
 
-const PageHero = ({ data, imageAlt = '', preset = 'pageHero', graphic, children }) => {
+const PageHero = ({
+	data,
+	imageAlt = '',
+	preset = 'pageHero',
+	graphic,
+	children,
+}) => {
 	const { headline, subheadline, heroImage } = data ? data : {};
 	const graphicClassName = graphic ? GRAPHIC_CLASSNAMES[graphic] : null;
 
 	return (
-		<header className='sticky top-0 z-0 flex flex-col md:grid md:grid-rows-1 md:grid-cols-2 h-[calc(100svh-var(--hero-pt))] gap-[2.56rem] md:gap-0 bg-light border-t border-accent overflow-hidden'>
+		<header className='sticky top-0 z-0 flex flex-col md:grid md:grid-rows-1 md:grid-cols-2 h-[calc(100svh-var(--hero-pt))] gap-0 bg-light border-t border-accent overflow-hidden'>
 			<div
 				className='relative overflow-hidden md:overflow-visible flex flex-col justify-start md:justify-end pt-4.25 md:pt-0 md:py-2.5 lg:py-5 gap-1.5 md:pr-2 lg:pr-4
 		pl-[max(1rem,calc((100vw-1440px)/2+1rem))]
@@ -25,9 +31,11 @@ const PageHero = ({ data, imageAlt = '', preset = 'pageHero', graphic, children 
 					<SectionGraphic variant={graphic} className={graphicClassName} />
 				)}
 
-				<div className='relative z-10 flex flex-col gap-1.5 '>
+				<div className='relative z-10 flex flex-col gap-1.5 pb-[2.56rem] '>
 					{headline && <h1>{headline}</h1>}
-					{subheadline && <p className='text-paragraph-lg w-[75%] md:w-full'>{subheadline}</p>}
+					{subheadline && (
+						<p className='text-paragraph-lg w-[75%] md:w-full'>{subheadline}</p>
+					)}
 					{children}
 				</div>
 			</div>
