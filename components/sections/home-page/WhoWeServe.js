@@ -1,4 +1,4 @@
-import Section from '@/components/layout/Section';
+// components/sections/home-page/WhoWeServe.js
 import ButtonLink from '@/components/ui/ButtonLink';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SanityImage from '@/components/ui/SanityImage';
@@ -8,25 +8,36 @@ const WhoWeServe = ({ data }) => {
 		? data
 		: {};
 	return (
-		<Section
-			bg='bg-dark '
-			py='0'
-			className='pb-5 lg:pb-8.75 space-y-2.5 lg:space-y-4'
-		>
-			<SectionHeading onDark={true} label={sectionLabel} heading={heading} />
-			<div className='grid lg:grid-cols-2 gap-[1px] bg-accent/50 border border-accent/50'>
-				<SectorCard
-					data={publicSectorCard}
-					alt='State capitol building surrounded by autumn trees'
-					href='/who-we-serve/#public-sector'
-				/>
-				<SectorCard
-					data={privateSectorCard}
-					alt='Hands reviewing architectural floor plans at a table'
-					href='/who-we-serve/#private-sector'
-				/>
+		<section className='relative overflow-hidden bg-dark'>
+			<div className='relative z-10 section-x-padding pb-5 lg:pb-8.75 '>
+				<div className='relative lg:flex lg:items-end lg:justify-between'>
+					<div className='relative z-10 py-2.5 lg:py-4'>
+						<SectionHeading
+							onDark={true}
+							label={sectionLabel}
+							heading={heading}
+						/>
+					</div>
+					<div className='absolute lg:static top-0 right-0 flex items-end gap-5.5 lg:gap-8.5 h-full lg:h-[25rem] pointer-events-none select-none'>
+						<div className='w-2.5 lg:w-4.5 h-[61%] bg-light/15' />
+						<div className='w-2.5 lg:w-4.5 h-full bg-light/15' />
+						<div className='hidden lg:block w-2.5 lg:w-4.5 h-[61%] bg-light/15' />
+					</div>
+				</div>
+				<div className='grid lg:grid-cols-2 gap-[1px] bg-accent/50 border border-accent/50'>
+					<SectorCard
+						data={publicSectorCard}
+						alt='State capitol building surrounded by autumn trees'
+						href='/who-we-serve/#public-sector'
+					/>
+					<SectorCard
+						data={privateSectorCard}
+						alt='Hands reviewing architectural floor plans at a table'
+						href='/who-we-serve/#private-sector'
+					/>
+				</div>
 			</div>
-		</Section>
+		</section>
 	);
 };
 

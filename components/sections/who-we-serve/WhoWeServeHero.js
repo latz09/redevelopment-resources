@@ -7,6 +7,7 @@ const WhoWeServeHero = ({ data }) => {
 			data={data}
 			imageAlt={data?.headline || 'Who we serve hero image'}
 			preset='whoWeServeHero'
+			graphic='flag'
 		/>
 	);
 };

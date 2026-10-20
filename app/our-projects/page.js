@@ -25,7 +25,7 @@ const OurProjects = async () => {
       {/* Hero + overview share a wrapper so the sticky hero has room to pin
           (same setup as the service pages). */}
       <div>
-        <PageHero data={hero} />
+        <PageHero graphic='flag' data={hero} />
         <ProjectsOverview data={overview} />
       </div>
       <FlagshipProject data={flagship} />

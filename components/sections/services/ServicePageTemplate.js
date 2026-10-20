@@ -21,7 +21,7 @@ const ServicePageTemplate = ({ data }) => {
 			    parent tall enough to pin inside while the overview slides up
 			    over it. Everything after the overview stays outside. */}
 			<div>
-				<PageHero data={hero} />
+				<PageHero data={hero} graphic='wave' />
 				<ServiceOverview data={overview} />
 			</div>
 			<Offerings data={offerings} />

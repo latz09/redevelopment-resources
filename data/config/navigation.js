@@ -1,5 +1,10 @@
 // Per-project: routes that need light-on-dark nav styling
-export const DARK_NAV_ROUTES = ['/', '/who-we-are'];
+export const DARK_NAV_ROUTES = [
+	'/',
+	'/who-we-are',
+	'/legal/privacy-policy',
+	'/legal/accessibility',
+];
 
 // Placeholder nav links for display/design purposes before this project is
 // wired to the CMS. isButton: true marks the CTA link.

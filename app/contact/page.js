@@ -14,9 +14,7 @@ const Contact = async () => {
 
   return (
     <PageContainer>
-      <Section className="h-[80vh] grid place-items-center">
-        <div>{data?.page?.title}</div>
-      </Section>
+     
     </PageContainer>
   )
 }

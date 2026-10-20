@@ -5,7 +5,7 @@ import StatNumber from '@/components/ui/StatNumber';
 
 const ByTheNumbers = ({ data }) => {
 	return (
-		<Section bg='bg-dark'>
+		<Section bg='bg-dark' py="pt-5 lg:pt-8.75">
 			<div className='grid lg:grid-cols-2 gap-4 border-b border-accent/50 pb-5 lg:pb-8.75'>
 				<div className='relative h-[22rem] lg:h-[37.5rem]'>
 					<SanityImage

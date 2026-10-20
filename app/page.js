@@ -18,7 +18,8 @@ export async function generateMetadata() {
 const Home = async () => {
 	const data = await fc(Q);
 
-	const { hero, approach, services, whoWeServe, testimonialSection } = data.page || {};
+	const { hero, approach, services, whoWeServe, testimonialSection } =
+		data.page || {};
 	const { siteSettings, testimonials } = data || {};
 	const { globalCta, ...stats } = siteSettings || {};
 
@@ -29,8 +30,10 @@ const Home = async () => {
 				<Approach data={approach} />
 			</div>
 			<Services data={services} />
-			<ByTheNumbers data={stats} />
-			<WhoWeServe data={whoWeServe} />
+			<div>
+				<ByTheNumbers data={stats} />
+				<WhoWeServe data={whoWeServe} />
+			</div>
 			<TestimonialSection data={testimonialSection} quotes={testimonials} />
 			<GlobalCTA data={globalCta} />
 		</PageContainer>

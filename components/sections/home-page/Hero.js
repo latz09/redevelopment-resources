@@ -1,5 +1,7 @@
+// components/sections/home-page/Hero.js
 import SanityImage from '@/components/ui/SanityImage';
 import ButtonLink from '@/components/ui/ButtonLink';
+import SectionGraphic from '@/components/ui/SectionGraphic';
 
 const Hero = ({ data }) => {
 	const { headline, subheadline, primaryCta, secondaryCta, heroImage } = data
@@ -11,14 +13,23 @@ const Hero = ({ data }) => {
 			{/* Text panel — manually restoring the left inset that
 			    section-x-padding used to give us for free */}
 			<div
-				className='bg-primary flex flex-col justify-center gap-1.5 py-2
+				className='relative overflow-hidden md:overflow-visible bg-primary flex flex-col justify-end gap-1.5 py-5
 		pl-[max(1rem,calc((100vw-1440px)/2+1rem))]
 		sm:pl-[max(1.25rem,calc((100vw-1440px)/2+1.25rem))]
 		md:pl-[max(2.5rem,calc((100vw-1440px)/2+2.5rem))]
 		lg:pl-[max(5rem,calc((100vw-1440px)/2+5rem))]
 		3xl:pl-[max(5rem,calc((100vw-1728px)/2+5rem))]'
 			>
-				<div className='max-w-[36rem]'>
+				{/* Oversized decorative graphic — bleeds right toward the image
+				    column at md+ (covered there by the image panel's paint order,
+				    no z-index juggling needed); clipped to its own box on mobile
+				    where there's no neighbor to hide the overflow in */}
+				<SectionGraphic
+					variant='flag'
+				className='absolute z-0 top-0 -left-1.5 md:left-0 h-full w-auto text-light/10 pointer-events-none select-none'
+				/>
+
+				<div className='relative z-10 max-w-[36rem] '>
 					{headline && <h1 className='hero-title text-light'>{headline}</h1>}
 					{subheadline && (
 						<p className='text-paragraph text-light/80 mt-1'>{subheadline}</p>
@@ -63,3 +74,6 @@ const Hero = ({ data }) => {
 };
 
 export default Hero;
+
+
+

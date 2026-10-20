@@ -11,8 +11,8 @@ import {
 	useReducedMotion,
 	useTransform,
 } from 'framer-motion';
-import SplitContent from '@/components/layout/SplitContent';
 import SectionHeading from '@/components/ui/SectionHeading';
+import SectionGraphic from '@/components/ui/SectionGraphic';
 
 const stripQuoteMarks = (str) =>
 	str?.trim().replace(/^["']+|["']+$/g, '') ?? '';
@@ -99,104 +99,119 @@ const TestimonialSection = ({ data, quotes }) => {
 	};
 
 	return (
-		<SplitContent
-			left={
-				<div className='flex flex-col justify-between h-full gap-2.5 lg:gap-5.75'>
-					<SectionHeading
-						label={sectionLabel}
-						heading={heading}
-						as='h2'
-						onDark={false}
+		<div className='relative z-10 bg-light'>
+			<div className='section-x-padding grid lg:grid-cols-2 gap-3.5 lg:gap-0 divide-y lg:divide-x divide-accent/50'>
+				{/* Left — graphic lives here, in its own relative/overflow-hidden
+				    cell so it's sized and clipped against this cell's own real
+				    height (CSS Grid stretches both cells to match the taller
+				    one, so this still sizes correctly whichever side is taller
+				    on a given screen) rather than fighting a shared wrapper's
+				    padding, which is what SplitContent's padding forced before. */}
+				<div className='relative overflow- pt-5 lg:py-8.75 lg:pr-2'>
+					<SectionGraphic
+						variant='wave'
+						className='absolute z-0 top-1/2 left-0 translate-x-[20%] md:translate-x-[40%] -translate-y-1/2  h-[140%] lg:h-full w-auto lg:-translate-x-[30%] text-secondary/10 pointer-events-none select-none'
 					/>
-					<Arrows onPrev={prev} onNext={next} className='place-self-end' />
-				</div>
-			}
-			right={
-				<div className='flex flex-col justify-between h-full gap-1.5 lg:gap-3.5 pb-1.75 lg:pb-0 '>
-					{/* Index counter — counts, doesn't slide */}
-					<p className='text-overline'>
-						<Counter value={index + 1} />
-						{` / ${String(total).padStart(2, '0')}`}
-					</p>
 
-					{/* Quote — draggable. touchAction: 'pan-y' lets the page still
-					    scroll vertically on touch while this element claims
-					    horizontal drag for the swipe. */}
-					<div className='relative mb-1.25 lg:mb-4 overflow-hidden'>
-						{/* height lock stack, unchanged */}
-						<div
-							className='grid invisible pointer-events-none'
-							aria-hidden='true'
-						>
-							{quotes.map((quote) => (
-								<div key={quote._id} className='col-start-1 row-start-1'>
-									<p className='text-callout'>
-										&ldquo;{cleanQuote(quote.quote)}&rdquo;
-									</p>
-								</div>
-							))}
-						</div>
-						<AnimatePresence custom={direction} initial={false}>
-							<motion.div
-								key={current._id}
-								custom={direction}
-								variants={variants}
-								initial='enter'
-								animate='center'
-								exit='exit'
-								transition={transition}
-								drag={total > 1 ? 'x' : false}
-								dragConstraints={{ left: 0, right: 0 }}
-								dragElastic={0}
-								dragMomentum={false}
-								onDragEnd={onDragEnd}
-								style={{ touchAction: 'pan-y' }}
-								className='absolute inset-0 cursor-grab active:cursor-grabbing select-none'
-							>
-								<p className='text-callout'>
-									&ldquo;{cleanQuote(current.quote)}&rdquo;
-								</p>
-							</motion.div>
-						</AnimatePresence>
+					<div className='relative z-10 flex flex-col justify-between h-full gap-2.5 lg:gap-5.75'>
+						<SectionHeading
+							label={sectionLabel}
+							heading={heading}
+							as='h2'
+							onDark={false}
+						/>
+						<Arrows onPrev={prev} onNext={next} className='place-self-end' />
 					</div>
+				</div>
 
-					{/* Attribution */}
-					<div className='relative mt-1.25 lg:mt-0'>
-						{/* Same type classes as the visible layer below, so the
-						    reserved height matches what's actually rendered. */}
-						<div
-							className='grid invisible pointer-events-none'
-							aria-hidden='true'
-						>
-							{quotes.map((quote) => (
-								<div
-									key={quote._id}
-									className='col-start-1 row-start-1 space-y-0.5'
+				{/* Right — unchanged from before, no graphic here */}
+				<div className='lg:pl-2 py-3.5 lg:py-8.75'>
+					<div className='flex flex-col justify-between h-full gap-1.5 lg:gap-3.5 pb-1.75 lg:pb-0 '>
+						{/* Index counter — counts, doesn't slide */}
+						<p className='text-overline'>
+							<Counter value={index + 1} />
+							{` / ${String(total).padStart(2, '0')}`}
+						</p>
+
+						{/* Quote — draggable. touchAction: 'pan-y' lets the page still
+						    scroll vertically on touch while this element claims
+						    horizontal drag for the swipe. */}
+						<div className='relative mb-1.25 lg:mb-4 overflow-hidden'>
+							{/* height lock stack, unchanged */}
+							<div
+								className='grid invisible pointer-events-none'
+								aria-hidden='true'
+							>
+								{quotes.map((quote) => (
+									<div key={quote._id} className='col-start-1 row-start-1'>
+										<p className='text-callout'>
+											&ldquo;{cleanQuote(quote.quote)}&rdquo;
+										</p>
+									</div>
+								))}
+							</div>
+							<AnimatePresence custom={direction} initial={false}>
+								<motion.div
+									key={current._id}
+									custom={direction}
+									variants={variants}
+									initial='enter'
+									animate='center'
+									exit='exit'
+									transition={transition}
+									drag={total > 1 ? 'x' : false}
+									dragConstraints={{ left: 0, right: 0 }}
+									dragElastic={0}
+									dragMomentum={false}
+									onDragEnd={onDragEnd}
+									style={{ touchAction: 'pan-y' }}
+									className='absolute inset-0 cursor-grab active:cursor-grabbing select-none'
 								>
-									<p className='text-paragraph-lg'>{quote.name}</p>
-									<p className='text-paragraph'>{attribution(quote)}</p>
-								</div>
-							))}
+									<p className='text-callout'>
+										&ldquo;{cleanQuote(current.quote)}&rdquo;
+									</p>
+								</motion.div>
+							</AnimatePresence>
 						</div>
-						<AnimatePresence custom={direction} initial={false}>
-							<motion.div
-								key={current._id}
-								custom={direction}
-								variants={variants}
-								initial='enter'
-								animate='center'
-								exit='exit'
-								transition={{ ...transition, delay: reduceMotion ? 0 : 0.06 }}
-								className='absolute inset-0 space-y-0.5'
+
+						{/* Attribution */}
+						<div className='relative mt-1.25 lg:mt-0'>
+							{/* Same type classes as the visible layer below, so the
+							    reserved height matches what's actually rendered. */}
+							<div
+								className='grid invisible pointer-events-none'
+								aria-hidden='true'
 							>
-								<p className='text-paragraph-lg'>{current.name}</p>
-								<p className='text-paragraph'>{attribution(current)}</p>
-							</motion.div>
-						</AnimatePresence>
+								{quotes.map((quote) => (
+									<div
+										key={quote._id}
+										className='col-start-1 row-start-1 space-y-0.5'
+									>
+										<p className='text-paragraph-lg'>{quote.name}</p>
+										<p className='text-paragraph'>{attribution(quote)}</p>
+									</div>
+								))}
+							</div>
+							<AnimatePresence custom={direction} initial={false}>
+								<motion.div
+									key={current._id}
+									custom={direction}
+									variants={variants}
+									initial='enter'
+									animate='center'
+									exit='exit'
+									transition={{ ...transition, delay: reduceMotion ? 0 : 0.06 }}
+									className='absolute inset-0 space-y-0.5'
+								>
+									<p className='text-paragraph-lg'>{current.name}</p>
+									<p className='text-paragraph'>{attribution(current)}</p>
+								</motion.div>
+							</AnimatePresence>
+						</div>
 					</div>
 				</div>
-			}
-		/>
+			</div>
+		</div>
 	);
 };
 
