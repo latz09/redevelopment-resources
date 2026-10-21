@@ -6,7 +6,7 @@ import JsonLd from '@/components/seo/JsonLd';
 import NavigationContainer from '@/components/layout/navigation/NavigationContainer';
 import './globals.css';
 import localFont from 'next/font/local';
-import DesignSystemBadge from '@/components/design/DesignSystemBadge';
+
 
 // Cabinet Grotesk — heading face. Files live in app/fonts/ (sibling to this
 // file). Only Regular/Medium/Bold are loaded — that's all the guide uses.
@@ -77,7 +77,7 @@ export default async function RootLayout({ children }) {
 				<main>{children}</main>
 				<Analytics />
 				<Footer businessName={seo?.siteName} />
-				<DesignSystemBadge />
+			
 			</body>
 		</html>
 	);

@@ -19,7 +19,7 @@ const innerRight = 'pr-1 sm:pr-1.25 md:pr-2.5 lg:pr-5';
 const ContactHero = ({ headline, subheadline }) => {
   return (
     <header className="grid lg:grid-cols-2 min-h-[35rem]">
-      <div className="relative overflow-hidden bg-primary flex items-end border-t border-accent">
+      <div className="relative overflow-hidden bg-primary flex items-end lg:border-t border-accent">
         <SectionGraphic
           variant='flag'
           className='absolute z-0 top-0 left-0 h-full w-auto text-light/10 pointer-events-none select-none'
