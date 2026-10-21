@@ -4,6 +4,7 @@ export const DARK_NAV_ROUTES = [
 	'/who-we-are',
 	'/legal/privacy-policy',
 	'/legal/accessibility',
+	'/contact'
 ];
 
 // Placeholder nav links for display/design purposes before this project is

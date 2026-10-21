@@ -1,5 +1,5 @@
 const baseInputClasses =
-	'w-full px-1 py-0.75 border border-dark/20 rounded bg-white text-paragraph focus:outline-none focus:border-secondary transition-all duration-300';
+	'w-full px-1 py-0.75 border border-dark/20 rounded bg-white text-paragraph  focus:outline-none focus:border-secondary transition-all duration-300';
 
 // One field, any type. This is the whole reason ContactForm.js used to need
 // editing for one-off fields — now a new field is a clientConfig.js entry,
@@ -17,7 +17,7 @@ const renderField = (field, formData, handleInputChange) => {
 					onChange={handleInputChange}
 					required={field.required}
 					placeholder={field.placeholder}
-					rows={field.rows || 5}
+					rows={field.rows || 2}
 					className={`${baseInputClasses} resize-none`}
 				/>
 			);
@@ -51,7 +51,7 @@ const renderField = (field, formData, handleInputChange) => {
 						return (
 							<label
 								key={option.value}
-								className={`flex items-center gap-0.5 px-1 py-0.5 border rounded text-caption cursor-pointer transition-colors duration-200 ${
+								className={`flex items-center gap-0.5 px-1 py-0.5 border rounded text-paragraph-sm cursor-pointer transition-colors duration-200 ${
 									isSelected
 										? 'border-secondary bg-secondary/10'
 										: 'border-dark/20 hover:border-dark/40'
@@ -90,33 +90,41 @@ const renderField = (field, formData, handleInputChange) => {
 	}
 };
 
+// textarea/radio fields take the full row — a textarea in a half column looks
+// cramped, and a radio group's option count doesn't predictably fit one.
+const FULL_WIDTH_TYPES = ['textarea', 'radio'];
+
 const ContactForm = ({
 	fields,
 	formData,
 	handleInputChange,
 	handleSubmit,
+	handleReset,
 	isLoading,
 	error,
 	success,
 }) => {
 	return (
-		<form
-			onSubmit={handleSubmit}
-			className='w-full max-w-3xl mx-auto px-1 py-2'
-		>
+		<form onSubmit={handleSubmit} className=''>
 			<div className='mb-2'>
-				<h2>Get in Touch</h2>
-				<p className='text-paragraph text-dark/60'>
-					Fill out the form below and we will get back to you shortly.
-				</p>
+				<h5>Fill out the form to start the conversation</h5>
 			</div>
 
-			<div className='space-y-1.5 mb-2'>
+			<div
+				className={`grid lg:grid-cols-2 gap-1.5 gap-x-2 mb-2 transition-opacity duration-300 ${
+					success ? 'opacity-75' : ''
+				}`}
+			>
 				{fields.map((field) => (
-					<div key={field.name}>
+					<div
+						key={field.name}
+						className={
+							FULL_WIDTH_TYPES.includes(field.type) ? 'lg:col-span-2' : ''
+						}
+					>
 						<label
 							htmlFor={field.name}
-							className='text-caption font-semibold block mb-0.5'
+							className='text-paragraph-sm block mb-[0.12rem] leading-[140%]'
 						>
 							{field.label}
 							{field.required && '*'}
@@ -127,11 +135,29 @@ const ContactForm = ({
 			</div>
 
 			<button
-				type='submit'
+				type={success ? 'button' : 'submit'}
+				onClick={success ? handleReset : undefined}
 				disabled={isLoading}
-				className='w-full bg-primary text-button text-white py-0.75 rounded border border-primary hover:opacity-90 active:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300'
+				className={`group text-button inline-flex items-center justify-center rounded transition-all duration-300 py-[0.62rem] px-1 border active:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed ${
+					success
+						? 'bg-light text-secondary border-secondary hover:bg-secondary hover:text-white'
+						: 'bg-secondary text-white border-secondary hover:text-secondary hover:bg-light hover:border-secondary'
+				}`}
 			>
-				{isLoading ? 'Sending...' : 'Send Message'}
+				{isLoading ? (
+					'Sending...'
+				) : success ? (
+					<>
+						<span className='group-hover:hidden'>
+							Message sent successfully
+						</span>
+						<span className='hidden group-hover:inline '>
+							Send another message?
+						</span>
+					</>
+				) : (
+					'Send Message'
+				)}
 			</button>
 
 			{error && (
@@ -139,13 +165,7 @@ const ContactForm = ({
 					{error}
 				</p>
 			)}
-			{success && (
-				<p className='mt-1 p-1 rounded border border-secondary text-caption text-primary bg-white'>
-					{success}
-				</p>
-			)}
 		</form>
 	);
 };
-
 export default ContactForm;

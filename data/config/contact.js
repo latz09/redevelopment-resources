@@ -1,34 +1,32 @@
 export const contactConfig = {
 	branding: {
-		name: 'CLIENT_NAME',
+		name: 'Redevelopment Resources',
 		logoUrl:
-			'https://cdn.sanity.io/images/9yfxmlzk/production/................................', // Replace with actual logo
+			'https://cdn.sanity.io/images/g10gcdsi/production/c81d758e780e808bdfa016e8af8edd38e0d30c77-720x161.png', // TODO: real logo asset URL
 		colors: {
-			background: '#FFFDF9', // page/section background behind the logo + body
-			surface: '#F5F0E6', // "Submission Details" box background
-			accent: '#3C084D', // top bar, eyebrow text, buttons, textarea border — customize per client
-			text: '#111827',
-			textMuted: '#6B7280',
+			background: '#F6F1F1', // white
+			surface: '#E9DFC9', // Cream, "Submission Details" box
+			accent: '#8E4D40', // Maroon, buttons/eyebrow/border
+			text: '#0F1A25', // Navy
+			textMuted: '#ACA48A', // Sage Gray
 		},
 		contactInfo: {
-			phone: '', // Replace with client's actual phone
-			email: process.env.CLIENT_EMAIL, // Or hardcode if needed
+			phone: '(715)-581-1452', // fallback only, seoSettings.phone wins if set
+			email: process.env.CLIENT_EMAIL,
 		},
 	},
 
 	features: {
-		// Auto-response to the person who filled out the form is a paid add-on.
-		// Off by default — flip to true once the client's paid for it.
-		autoResponseEmail: false,
+		autoResponseEmail: true, // flip once/if they pay for it
 	},
 
 	formFields: [
 		{
 			name: 'name',
-			label: 'Name',
+			label: 'First and last name',
 			required: true,
 			type: 'text',
-			placeholder: 'Your name',
+			placeholder: 'First and last name',
 		},
 		{
 			name: 'email',
@@ -38,25 +36,30 @@ export const contactConfig = {
 			placeholder: 'you@example.com',
 		},
 		{
-			name: 'phoneNumber',
-			label: 'Phone Number',
+			name: 'organization',
+			label: 'Organization',
+			required: false,
+			type: 'text',
+			placeholder: 'Organization (optional)',
+		},
+		{
+			name: 'sector',
+			label: 'Sector',
 			required: true,
-			type: 'tel',
-			placeholder: '(123) 456-7890',
+			type: 'select',
+			placeholder: 'Public or Private',
+			options: [
+				{ value: 'public', label: 'Public' },
+				{ value: 'private', label: 'Private' },
+			],
 		},
 		{
 			name: 'message',
-			label: 'How can we help?',
+			label: 'Your message',
 			required: false,
 			type: 'textarea',
 			placeholder: 'Tell us about your project...',
 		},
-		// Add fields here as needed — supported types: text, email, tel, textarea, select, radio.
-		// select/radio need an `options: [{ value, label }]` array, e.g.:
-		// { name: 'projectType', label: 'Project Type', required: false, type: 'radio', options: [
-		//   { value: 'new_site', label: 'New website' },
-		//   { value: 'redesign', label: 'Redesign' },
-		// ] },
 	],
 
 	messaging: {
@@ -66,15 +69,15 @@ export const contactConfig = {
 		clientNotificationEyebrow: 'New Website Inquiry',
 		clientNotificationHeading: 'New Contact Form Submission',
 		clientNotificationIntro:
-			"You have received a new message from your website's contact form.",
+			'A new project inquiry has come in through the Redevelopment Resources website.',
 
 		autoResponseEyebrow: 'Message Received',
 		autoResponseGreeting: (name) => `Thanks for reaching out, ${name}!`,
 		autoResponseBody:
-			"We've received your message and will be in touch within 1-2 business days.",
+			"We've received your message and will be in touch soon to talk through your project.",
 		autoResponseUrgentNote:
 			'If you have any urgent questions, feel free to call us directly.',
 		signoffLabel: 'Best regards,',
-		autoResponseClosing: 'CLIENT_NAME', // Replace with client name, e.g. 'Jeff<br/>CLIENT_NAME'
+		autoResponseClosing: 'Redevelopment Resources',
 	},
 };

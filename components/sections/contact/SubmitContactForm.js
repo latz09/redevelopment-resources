@@ -4,10 +4,6 @@ import { useState } from 'react';
 import ContactForm from './ContactForm';
 import { contactConfig } from '@/data/config/contact';
 
-// Derives initial (and reset) state straight from the field config, so a
-// field rename in contact.js can never leave a stale key behind here —
-// that's exactly the class of bug that bit the message/description rename
-// on Classic Log Homes.
 const buildInitialFormData = () => {
 	const initial = {};
 	contactConfig.formFields.forEach((field) => {
@@ -29,6 +25,15 @@ const SubmitContactForm = () => {
 			...prev,
 			[name]: value,
 		}));
+	};
+
+	// Handles the "Send another message" click — separate from handleSubmit
+	// because the button becomes type="button" in the success state, so this
+	// never goes through form submission (and its required-field validation).
+	const handleReset = () => {
+		setFormData(buildInitialFormData());
+		setSuccess('');
+		setError('');
 	};
 
 	const handleSubmit = async (e) => {
@@ -67,6 +72,7 @@ const SubmitContactForm = () => {
 			formData={formData}
 			handleInputChange={handleInputChange}
 			handleSubmit={handleSubmit}
+			handleReset={handleReset}
 			isLoading={isLoading}
 			error={error}
 			success={success}
