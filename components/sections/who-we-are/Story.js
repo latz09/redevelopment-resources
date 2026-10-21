@@ -11,7 +11,7 @@ const Story = ({ data }) => {
 				<div className='relative lg:pr-2 pt-5 lg:py-8.75'>
 					<SectionGraphic
 						variant='wave'
-						className='absolute z-0 top-1/2 left-0 translate-x-[20%] md:translate-x-[40%] -translate-y-1/2 h-[100%] lg:h-full w-auto lg:-translate-x-[30%] text-secondary/10 pointer-events-none select-none overflow-hidden'
+						className='absolute z-0 top-1/2 right-0 lg:left-0 translate-x-[50%] md:translate-x-[40%] -translate-y-1/2 h-[100%] lg:h-full w-auto lg:-translate-x-[30%] text-secondary/10 pointer-events-none select-none overflow-hidden'
 					/>
 					<div className='relative z-10'>
 						<SectionHeading
