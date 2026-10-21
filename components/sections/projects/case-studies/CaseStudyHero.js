@@ -9,10 +9,10 @@ const CaseStudyHero = ({ data }) => {
 	return (
 		<>
 			<header className='relative overflow-hidden lg:border-y border-accent'>
-			<SectionGraphic
-	variant='hook'
-	className='absolute z-0 top-1/2 -translate-y-1/2 right-0 w-[200%] translate-x-1/2 lg:w-1/2 lg:translate-x-1/2 text-secondary/10 pointer-events-none select-none overflow-hidden'
-/>
+				<SectionGraphic
+					variant='hook'
+					className='absolute z-0 top-1/2 -translate-y-1/2 right-0 w-[200%] translate-x-1/2 lg:w-1/2 lg:translate-x-1/2 text-secondary/10 pointer-events-none select-none overflow-hidden'
+				/>
 
 				<div className='relative z-10 section-x-padding pt-3.5 lg:pt-5 pb-5 space-y-1.5 lg:space-y-2'>
 					<h1>{title}</h1>
