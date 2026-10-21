@@ -1,8 +1,21 @@
 // components/sections/our-projects/FlagshipProject.js
+'use client';
+
+import { motion } from 'framer-motion';
 import Section from '@/components/layout/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SanityImage from '@/components/ui/SanityImage';
 import ButtonLink from '@/components/ui/ButtonLink';
+
+const headerContainer = {
+	hidden: {},
+	visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const headerItem = {
+	hidden: { opacity: 0, y: 12 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } },
+};
 
 const FlagshipProject = ({ data }) => {
 	const { sectionLabel, body, cta, caseStudy } = data || {};
@@ -17,16 +30,24 @@ const FlagshipProject = ({ data }) => {
 	const hasImage = Boolean(caseStudy.heroImage?.asset);
 
 	return (
-		<Section py='py-5 lg:py-8.75 border-t border-accent/50'>
+		<Section py='py-5 lg:py-8.75'>
 			{/* Header row: title left, blurb + button right, rule underneath */}
-			<div className='grid lg:grid-cols-2 gap-1.5 lg:gap-4 pb-3.5 lg:pb-4 border-b border-dark/50'>
-				<SectionHeading
-					label={sectionLabel}
-					heading={caseStudy.title}
-					as='h2'
-					onDark={false}
-				/>
-				<div className='space-y-2'>
+			<motion.div
+				className='grid lg:grid-cols-2 gap-1.5 lg:gap-4 pb-3.5 lg:pb-4 '
+				initial='hidden'
+				whileInView='visible'
+				viewport={{ once: true, amount: 0.4 }}
+				variants={headerContainer}
+			>
+				<motion.div variants={headerItem}>
+					<SectionHeading
+						label={sectionLabel}
+						heading={caseStudy.title}
+						as='h2'
+						onDark={false}
+					/>
+				</motion.div>
+				<motion.div variants={headerItem} className='space-y-2'>
 					{paragraphs.length > 0 && (
 						<div className='space-y-2'>
 							{paragraphs.map((paragraph, index) => (
@@ -45,13 +66,19 @@ const FlagshipProject = ({ data }) => {
 							{cta.label}
 						</ButtonLink>
 					)}
-				</div>
-			</div>
+				</motion.div>
+			</motion.div>
 
 			{/* Image below the grid. Skipped entirely until the case study has a
 			    hero (it's null on all of them right now). */}
 			{hasImage && (
-				<div className='relative aspect-[3/2] md:aspect-[16/9] lg:aspect-auto lg:h-[29rem] rounded overflow-hidden mt-3.5 lg:mt-4'>
+				<motion.div
+					className='relative aspect-[3/2] md:aspect-[16/9] lg:aspect-auto lg:h-[29rem] rounded overflow-hidden mt-3.5 lg:mt-4'
+					initial={{ opacity: 0, y: 12 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true, amount: 0.3 }}
+					transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+				>
 					<SanityImage
 						image={caseStudy.heroImage}
 						alt={caseStudy.title}
@@ -59,7 +86,7 @@ const FlagshipProject = ({ data }) => {
 						fill
 						sizes='(min-width: 1728px) 1728px, 100vw'
 					/>
-				</div>
+				</motion.div>
 			)}
 		</Section>
 	);

@@ -13,7 +13,7 @@ const ProjectsOverview = ({ data }) => {
 	return (
 		<SplitContent
 			left={
-				<div>
+				<div >
 					<SectionHeading
 						label={sectionLabel}
 						heading={heading}

@@ -1,8 +1,21 @@
 // RelatedServices.js
+'use client';
+
+import { motion } from 'framer-motion';
 import Section from '@/components/layout/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SanityImage from '@/components/ui/SanityImage';
 import ButtonLink from '@/components/ui/ButtonLink';
+
+const headerContainer = {
+	hidden: {},
+	visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const headerItem = {
+	hidden: { opacity: 0, y: 12 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } },
+};
 
 const RelatedServices = ({ data, promo }) => {
 	const relatedServices = data || [];
@@ -16,16 +29,20 @@ const RelatedServices = ({ data, promo }) => {
 			bg='bg-dark'
 			className='border-t border-dark/50 space-y-2.5 lg:space-y-4'
 		>
-			<div className='grid lg:grid-cols-2 items-center gap-1.5 lg:gap-6.5'>
-				<div className='max-w-[34.625rem]'>
-					<SectionHeading
-						label={sectionLabel}
-						heading={heading}
-						onDark='true'
-					/>
-				</div>
-				<p className='text-paragraph-lg text-light'>{subheading}</p>
-			</div>
+			<motion.div
+				className='grid lg:grid-cols-2 items-center gap-1.5 lg:gap-6.5'
+				initial='hidden'
+				whileInView='visible'
+				viewport={{ once: true, amount: 0.4 }}
+				variants={headerContainer}
+			>
+				<motion.div variants={headerItem} className='max-w-[34.625rem]'>
+					<SectionHeading label={sectionLabel} heading={heading} onDark='true' />
+				</motion.div>
+				<motion.p variants={headerItem} className='text-paragraph-lg text-light'>
+					{subheading}
+				</motion.p>
+			</motion.div>
 
 			{count === 1 ? (
 				<SingleRelatedServiceCard {...relatedServices[0]} />
@@ -68,11 +85,7 @@ const RelatedServiceCard = ({ title, blurb, image, slug }) => {
 				{blurb && <p className='text-paragraph text-light'>{blurb}</p>}
 			</div>
 			{slug && title && (
-				<ButtonLink
-					href={slug}
-					variant='tertiary-on-dark'
-					className='px-0 py-0'
-				>
+				<ButtonLink href={slug} variant='tertiary-on-dark' className='px-0 py-0'>
 					{`Explore ${title}`}
 				</ButtonLink>
 			)}
@@ -102,11 +115,7 @@ const SingleRelatedServiceCard = ({ title, blurb, image, slug }) => {
 					{blurb && <p className='text-paragraph text-light'>{blurb}</p>}
 				</div>
 				{slug && title && (
-					<ButtonLink
-						href={slug}
-						variant='tertiary-on-dark'
-						className='px-0 py-0'
-					>
+					<ButtonLink href={slug} variant='tertiary-on-dark' className='px-0 py-0'>
 						{`Explore ${title}`}
 					</ButtonLink>
 				)}

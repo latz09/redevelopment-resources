@@ -1,6 +1,8 @@
+'use client';
+
+import { motion, useReducedMotion } from 'framer-motion';
 import SectionGraphic from '@/components/ui/SectionGraphic';
 import SubmitContactForm from './SubmitContactForm';
-
 
 // section-x-padding's actual box: padding, PLUS mx-auto's centering gap once
 // the viewport exceeds container/wide (never INSTEAD of padding). So the
@@ -16,27 +18,63 @@ const outerRight =
 const innerLeft = 'pl-1 sm:pl-1.25 md:pl-2.5 lg:pl-5';
 const innerRight = 'pr-1 sm:pr-1.25 md:pr-2.5 lg:pr-5';
 
+const textContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const textItem = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } },
+};
+
+const formPanel = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: 0.15, ease: [0.4, 0, 0.2, 1] },
+  },
+};
+
 const ContactHero = ({ headline, subheadline }) => {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <header className="grid lg:grid-cols-2 min-h-[35rem]">
+    <header className="grid lg:grid-cols-2 min-h-[35rem] 3xl:min-h-[40rem]">
       <div className="relative overflow-hidden bg-primary flex items-end lg:border-t border-accent">
         <SectionGraphic
           variant='flag'
           className='absolute z-0 top-0 left-0 h-full w-auto text-light/10 pointer-events-none select-none'
         />
 
-        <div
+        <motion.div
           className={`relative z-10 ${outerLeft} ${innerRight} py-4 lg:py-4 3xl:py-8.75 space-y-1.5`}
+          initial={reduceMotion ? false : 'hidden'}
+          animate='visible'
+          variants={textContainer}
         >
-          <h1 className="text-light">{headline}</h1>
-          <p className="text-paragraph-lg text-light/80 max-w-[33.45rem] 3xl:max-w-[38rem]  ">{subheadline}</p>
-        </div>
+          <motion.h1 variants={textItem} className="text-light">
+            {headline}
+          </motion.h1>
+          <motion.p
+            variants={textItem}
+            className="text-paragraph-lg text-light/80 max-w-[33.45rem] 3xl:max-w-[38rem]"
+          >
+            {subheadline}
+          </motion.p>
+        </motion.div>
       </div>
 
       <div className="bg-light border-b border-accent">
-        <div className={`${innerLeft} ${outerRight} py-4 lg:py-5 3xl:py-8.75`}>
+        <motion.div
+          className={`${innerLeft} ${outerRight} py-4 lg:py-5 3xl:py-8.75`}
+          initial={reduceMotion ? false : 'hidden'}
+          animate='visible'
+          variants={formPanel}
+        >
           <SubmitContactForm />
-        </div>
+        </motion.div>
       </div>
     </header>
   );

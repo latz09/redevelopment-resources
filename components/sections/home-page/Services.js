@@ -1,8 +1,25 @@
+'use client';
+
 import Section from '@/components/layout/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { ArrowGrow } from '@/components/ui/ButtonLink';
 import ImageWindow from '@/components/ui/ImageWindow';
+
+const gridContainer = {
+	hidden: {},
+	visible: { transition: { staggerChildren: 0.08 } },
+};
+
+const gridItem = {
+	hidden: { opacity: 0, y: 12 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+	},
+};
 
 const Services = ({ data }) => {
 	const {
@@ -26,13 +43,34 @@ const Services = ({ data }) => {
 	].filter(Boolean);
 
 	return (
-		<Section  id='services' className='border-t border-dark/50 '>
-			<SectionHeading label={sectionLabel} heading={heading} as='h2' />
-			<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-dark/50 border border-dark/50 mt-2.5 lg:my-4'>
+		<Section id='services' className='border-t border-dark/50'>
+			<motion.div
+				initial={{ opacity: 0, y: 12 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, amount: 0.4 }}
+				transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+			>
+				<SectionHeading label={sectionLabel} heading={heading} as='h2' />
+			</motion.div>
+
+			<motion.div
+				className='grid md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-dark/50 border border-dark/50 mt-2.5 lg:my-4'
+				initial='hidden'
+				whileInView='visible'
+				viewport={{ once: true, amount: 0.2 }}
+				variants={gridContainer}
+			>
 				{cards.map((card, index) => (
-					<ServiceCard key={index} {...card} />
+					<motion.div
+						key={index}
+						variants={gridItem}
+						className='h-full bg-light'
+					>
+						<ServiceCard {...card} />
+					</motion.div>
 				))}
-			</div>
+			</motion.div>
+
 			<ImageWindow
 				image={servicesImage}
 				alt='Aerial view of a riverside community at sunset'
@@ -59,7 +97,7 @@ const ServiceCard = ({ title, description, url, iconUrl, ctaLabel }) => {
 			)}
 			<div className={`space-y-1 ${iconUrl ? 'mt-2 lg:mt-2.5' : ''}`}>
 				{title && (
-					<h4 className=' group-hover/card:text-light transition-colors duration-300'>
+					<h4 className='group-hover/card:text-light transition-colors duration-300'>
 						{title}
 					</h4>
 				)}

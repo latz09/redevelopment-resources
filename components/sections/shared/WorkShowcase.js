@@ -7,9 +7,13 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import SanityImage from '@/components/ui/SanityImage';
 import ButtonLink from '@/components/ui/ButtonLink';
 
-const rowVariants = {
-	hidden: { opacity: 0, y: 20 },
-	visible: { opacity: 1, y: 0 },
+const listVariants = {
+	hidden: { opacity: 0, y: 30 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+	},
 };
 
 const WorkShowcase = ({
@@ -29,9 +33,8 @@ const WorkShowcase = ({
 	const hasMore = shown < total;
 
 	// Tracks how many rows were on screen BEFORE the latest render, so only
-	// rows added by the most recent click get a stagger delay — rows already
-	// on screen don't replay their entrance animation (Framer only runs
-	// initial → animate once per mount, and these rows never unmount).
+	// rows added by the most recent "Load more" click get their own entrance
+	// animation — rows already visible stay static and don't replay.
 	const priorShown = useRef(initialCount);
 	useEffect(() => {
 		priorShown.current = shown;
@@ -56,30 +59,38 @@ const WorkShowcase = ({
 			</div>
 
 			{total > 0 && (
-				<ul>
+				<motion.ul
+					initial={reduceMotion ? false : 'hidden'}
+					whileInView='visible'
+					viewport={{ once: true, amount: 0.2 }}
+					variants={listVariants}
+				>
 					{items.slice(0, shown).map((item, i) => {
-						const newlyAdded = i >= priorShown.current;
-						const delay =
-							!reduceMotion && newlyAdded ? (i - priorShown.current) * 0.08 : 0;
+						const isNewlyAdded = i >= priorShown.current;
+
+						if (reduceMotion || !isNewlyAdded) {
+							return (
+								<li key={item.id} className='border-t border-accent/50'>
+									<WorkRow centerText={centerText} {...item} />
+								</li>
+							);
+						}
+
+						const delay = (i - priorShown.current) * 0.08;
 
 						return (
 							<motion.li
 								key={item.id}
-								initial={reduceMotion ? false : 'hidden'}
-								animate='visible'
-								variants={rowVariants}
-								transition={{
-									duration: reduceMotion ? 0 : 0.45,
-									delay,
-									ease: [0.22, 1, 0.36, 1],
-								}}
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.45, delay, ease: [0.4, 0, 0.2, 1] }}
 								className='border-t border-accent/50'
 							>
 								<WorkRow centerText={centerText} {...item} />
 							</motion.li>
 						);
 					})}
-				</ul>
+				</motion.ul>
 			)}
 
 			{hasMore && (
