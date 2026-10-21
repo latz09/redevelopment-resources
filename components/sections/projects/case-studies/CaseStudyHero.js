@@ -14,7 +14,7 @@ const CaseStudyHero = ({ data }) => {
 					className='absolute z-0 top-1/2 -translate-y-1/2 right-0 w-[200%] translate-x-1/2 lg:w-1/2 lg:translate-x-1/2 text-secondary/10 pointer-events-none select-none overflow-hidden'
 				/>
 
-				<div className='relative z-10 section-x-padding pt-3.5 lg:pt-5 pb-5 space-y-1.5 lg:space-y-2'>
+				<div className='relative z-10 section-x-padding lg:pt-5 lg:pb-5 space-y-1.5 lg:space-y-2'>
 					<h1>{title}</h1>
 					<p className='max-w-[40rem] text-paragraph-lg pb-1.5 lg:pb-2'>
 						{description}

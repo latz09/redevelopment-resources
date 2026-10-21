@@ -26,7 +26,7 @@ const DesktopNavbar = ({ navLinks, logoUrl }) => {
 		>
 			<div className='flex items-center w-full section-x-padding '>
 				<Logo
-					className='w-[13.725rem] 3xl:w-[16.5rem] h-auto'
+					className='w-[15rem] 3xl:w-[18.5rem] h-auto'
 					variant={isDark ? 'white' : 'default'}
 				/>
 				<nav className='flex gap-6 items-center ml-auto'>

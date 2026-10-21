@@ -99,30 +99,24 @@ const TestimonialSection = ({ data, quotes }) => {
 	};
 
 	return (
-		<div className='relative z-10 bg-light'>
-			<div className='section-x-padding grid lg:grid-cols-2 gap-3.5 lg:gap-0 divide-y lg:divide-x divide-accent/50'>
-				{/* Left — graphic lives here, in its own relative/overflow-hidden
-				    cell so it's sized and clipped against this cell's own real
-				    height (CSS Grid stretches both cells to match the taller
-				    one, so this still sizes correctly whichever side is taller
-				    on a given screen) rather than fighting a shared wrapper's
-				    padding, which is what SplitContent's padding forced before. */}
-				<div className='relative overflow- pt-5 lg:py-8.75 lg:pr-2'>
-					<SectionGraphic
-						variant='wave'
-						className='absolute z-0 top-1/2 left-0 translate-x-[20%] md:translate-x-[40%] -translate-y-1/2  h-[140%] lg:h-full w-auto lg:-translate-x-[30%] text-secondary/10 pointer-events-none select-none'
-					/>
+		<div className='relative z-10 bg-light overflow-x-hidden'>
+	<div className='section-x-padding grid lg:grid-cols-2 gap-3.5 lg:gap-0 divide-y lg:divide-x divide-accent/50'>
+		<div className='relative pt-5 lg:py-8.75 lg:pr-2 '>
+			<SectionGraphic
+				variant='wave'
+				className='absolute z-0 top-1/2 left-0 translate-x-[20%] md:translate-x-[40%] -translate-y-1/2  h-[140%] lg:h-full w-auto lg:-translate-x-[30%] text-secondary/10 pointer-events-none select-none overflow-hidden'
+			/>
 
-					<div className='relative z-10 flex flex-col justify-between h-full gap-2.5 lg:gap-5.75'>
-						<SectionHeading
-							label={sectionLabel}
-							heading={heading}
-							as='h2'
-							onDark={false}
-						/>
-						<Arrows onPrev={prev} onNext={next} className='place-self-end' />
-					</div>
-				</div>
+			<div className='relative z-10 flex flex-col justify-between h-full gap-2.5 lg:gap-5.75'>
+				<SectionHeading
+					label={sectionLabel}
+					heading={heading}
+					as='h2'
+					onDark={false}
+				/>
+				<Arrows onPrev={prev} onNext={next} className='place-self-end' />
+			</div>
+		</div>
 
 				{/* Right — unchanged from before, no graphic here */}
 				<div className='lg:pl-2 py-3.5 lg:py-8.75'>

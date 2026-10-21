@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import MenuIcon from './MenuIcon';
 import Logo from '../../lib/Logo';
+import SectionGraphic from '@/components/ui/SectionGraphic';
 
 const EASE = [0.25, 0.46, 0.45, 0.94];
 const PANEL_ID = 'mobile-nav-panel';
@@ -43,7 +44,10 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 	};
 
 	const handleNavClick = (label, url) => {
-		track(`CTA Click - Mobile Nav - ${label}`, { destination: url, buttonText: label });
+		track(`CTA Click - Mobile Nav - ${label}`, {
+			destination: url,
+			buttonText: label,
+		});
 		isNavigatingAway.current = true;
 		setIsNavOpen(false);
 	};
@@ -106,7 +110,10 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 	const menuVariants = { closed: { x: '100%' }, open: { x: '0%' } };
 	const linkContainerVariants = {
 		closed: { opacity: 0 },
-		open: { opacity: 1, transition: { staggerChildren: 0.07, delayChildren: 0.25 } },
+		open: {
+			opacity: 1,
+			transition: { staggerChildren: 0.07, delayChildren: 0.25 },
+		},
 	};
 	const linkVariants = {
 		closed: { x: 32, opacity: 0 },
@@ -121,7 +128,11 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 		>
 			<div className='relative z-20 w-full section-x-padding'>
 				<header className='flex items-center justify-between'>
-					<Logo className='w-[8.95rem]' variant={isDark ? 'white' : 'default'} url={logoUrl} />
+					<Logo
+						className='w-[8.95rem]'
+						variant={isDark ? 'white' : 'default'}
+						url={logoUrl}
+					/>
 					<MenuIcon
 						isNavOpen={isNavOpen}
 						toggleNav={toggleNav}
@@ -161,6 +172,11 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 									aria-modal='true'
 									aria-label='Mobile navigation menu'
 								>
+									<SectionGraphic
+										variant='hook'
+										className='absolute z-0 bottom-0 right-0 translate-x-1/2 w-[200%] text-secondary/10 pointer-events-none select-none'
+									/>
+
 									<div className='relative z-10 flex flex-col h-full px-1 py-1'>
 										<motion.div
 											initial={{ opacity: 0, y: -10 }}
@@ -168,7 +184,12 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 											transition={{ delay: 0.15, duration: 0.4, ease: EASE }}
 											className='flex items-center justify-end my-2'
 										>
-											<MenuIcon isNavOpen={isNavOpen} toggleNav={handleClose} variant='dark' controls={PANEL_ID} />
+											<MenuIcon
+												isNavOpen={isNavOpen}
+												toggleNav={handleClose}
+												variant='dark'
+												controls={PANEL_ID}
+											/>
 										</motion.div>
 
 										<motion.ul
@@ -185,14 +206,20 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 														<motion.li key={index} variants={linkVariants}>
 															<Link
 																href={link.url}
-																onClick={() => handleNavClick(link.label, link.url)}
+																onClick={() =>
+																	handleNavClick(link.label, link.url)
+																}
 																className={`group relative flex items-center justify-between py-0.75 border-b ${PANEL_THEME.linkDivider}`}
 															>
 																<span className='flex items-baseline gap-0.75'>
-																	<h4 className={`${PANEL_THEME.linkNumber} font-[700] tracking-wide`}>
+																	<h4
+																		className={`${PANEL_THEME.linkNumber} font-[700] tracking-wide`}
+																	>
 																		{String(index + 1).padStart(2, '0')}
 																	</h4>
-																	<h5 className={`${PANEL_THEME.linkText} transition-colors duration-300 ${PANEL_THEME.linkHover}`}>
+																	<h5
+																		className={`${PANEL_THEME.linkText} transition-colors duration-300 ${PANEL_THEME.linkHover}`}
+																	>
 																		{link.label}
 																	</h5>
 																</span>
@@ -210,15 +237,21 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 													<motion.li key={index} variants={linkVariants}>
 														<button
 															type='button'
-															onClick={() => setExpandedIndex(isExpanded ? null : index)}
+															onClick={() =>
+																setExpandedIndex(isExpanded ? null : index)
+															}
 															aria-expanded={isExpanded}
 															className={`w-full text-left group relative flex items-center justify-between py-0.75 border-b ${PANEL_THEME.linkDivider}`}
 														>
 															<span className='flex items-baseline gap-0.75'>
-																<h4 className={`${PANEL_THEME.linkNumber} font-[700] tracking-wide`}>
+																<h4
+																	className={`${PANEL_THEME.linkNumber} font-[700] tracking-wide`}
+																>
 																	{String(index + 1).padStart(2, '0')}
 																</h4>
-																<h5 className={`${PANEL_THEME.linkText} transition-colors duration-300 ${PANEL_THEME.linkHover}`}>
+																<h5
+																	className={`${PANEL_THEME.linkText} transition-colors duration-300 ${PANEL_THEME.linkHover}`}
+																>
 																	{link.label}
 																</h5>
 															</span>
@@ -253,7 +286,9 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 																		<li key={childIndex}>
 																			<Link
 																				href={child.url}
-																				onClick={() => handleNavClick(child.label, child.url)}
+																				onClick={() =>
+																					handleNavClick(child.label, child.url)
+																				}
 																				className={`block py-0.5 pl-2 ${PANEL_THEME.linkText} transition-colors duration-300 ${PANEL_THEME.linkHover}`}
 																			>
 																				<h5>{child.label}</h5>
@@ -277,8 +312,10 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 											>
 												<Link
 													href={contactLink.url}
-													onClick={() => handleNavClick(contactLink.label, contactLink.url)}
-													className={`w-full text-button inline-flex items-center justify-center rounded-sm transition-all duration-500 py-0.75 px-1.25 ${PANEL_THEME.ctaBg} ${PANEL_THEME.ctaText} ${PANEL_THEME.ctaHover}`}
+													onClick={() =>
+														handleNavClick(contactLink.label, contactLink.url)
+													}
+													className={`text-button rounded inline-flex items-end  rounded-sm transition-all duration-500 py-0.75 px-1.25 ${PANEL_THEME.ctaBg} ${PANEL_THEME.ctaText} ${PANEL_THEME.ctaHover}`}
 												>
 													{contactLink.label}
 												</Link>
