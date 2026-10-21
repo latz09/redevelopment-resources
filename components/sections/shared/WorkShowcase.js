@@ -7,15 +7,6 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import SanityImage from '@/components/ui/SanityImage';
 import ButtonLink from '@/components/ui/ButtonLink';
 
-const listVariants = {
-	hidden: { opacity: 0, y: 30 },
-	visible: {
-		opacity: 1,
-		y: 0,
-		transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
-	},
-};
-
 const WorkShowcase = ({
 	sectionLabel,
 	heading,
@@ -59,12 +50,7 @@ const WorkShowcase = ({
 			</div>
 
 			{total > 0 && (
-				<motion.ul
-					initial={reduceMotion ? false : 'hidden'}
-					whileInView='visible'
-					viewport={{ once: true, amount: 0.2 }}
-					variants={listVariants}
-				>
+				<ul>
 					{items.slice(0, shown).map((item, i) => {
 						const isNewlyAdded = i >= priorShown.current;
 
@@ -90,7 +76,7 @@ const WorkShowcase = ({
 							</motion.li>
 						);
 					})}
-				</motion.ul>
+				</ul>
 			)}
 
 			{hasMore && (
