@@ -2,7 +2,7 @@ export const contactConfig = {
 	branding: {
 		name: 'Redevelopment Resources',
 		logoUrl:
-			'https://cdn.sanity.io/images/g10gcdsi/production/c81d758e780e808bdfa016e8af8edd38e0d30c77-720x161.png', // TODO: real logo asset URL
+			'https://cdn.sanity.io/images/g10gcdsi/production/c81d758e780e808bdfa016e8af8edd38e0d30c77-720x161.png', 
 		colors: {
 			background: '#F6F1F1', // white
 			surface: '#E9DFC9', // Cream, "Submission Details" box

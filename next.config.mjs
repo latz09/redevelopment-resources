@@ -1,3 +1,5 @@
+import { REDIRECTS } from './data/config/redirects.js';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
@@ -35,6 +37,9 @@ const nextConfig = {
 			],
 		});
 		return config;
+	},
+	async redirects() {
+		return REDIRECTS;
 	},
 };
 
