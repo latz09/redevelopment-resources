@@ -1,6 +1,7 @@
 // components/sections/home-page/Hero.js
 'use client';
 
+import { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import SanityImage from '@/components/ui/SanityImage';
 import ButtonLink from '@/components/ui/ButtonLink';
@@ -21,6 +22,7 @@ const Hero = ({ data }) => {
 		? data
 		: {};
 	const reduceMotion = useReducedMotion();
+	const [imageLoaded, setImageLoaded] = useState(false);
 
 	return (
 		<header className='sticky top-0 z-0 grid grid-rows-[11fr_9fr] md:grid-rows-1 md:grid-cols-2 h-[calc(100svh-var(--hero-pt))]'>
@@ -68,11 +70,15 @@ const Hero = ({ data }) => {
 				</motion.div>
 			</div>
 
-			<div className='relative h-full overflow-hidden'>
+			<div className='relative h-full overflow-hidden bg-primary'>
 				<motion.div
 					className='relative h-full'
-					initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
-					animate={{ opacity: 1, scale: 1 }}
+					initial={{ opacity: 0, scale: 1.04 }}
+					animate={
+						reduceMotion || imageLoaded
+							? { opacity: 1, scale: 1 }
+							: { opacity: 0, scale: 1.04 }
+					}
 					transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
 				>
 					<SanityImage
@@ -82,6 +88,7 @@ const Hero = ({ data }) => {
 						fill
 						priority
 						sizes='(max-width: 767px) 100vw, 50vw'
+						onLoad={() => setImageLoaded(true)}
 					/>
 				</motion.div>
 			</div>

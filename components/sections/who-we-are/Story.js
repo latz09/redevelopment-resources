@@ -13,7 +13,7 @@ const Story = ({ data }) => {
 						variant='wave'
 						className='absolute z-0 top-1/2 right-0 lg:left-0 translate-x-[50%] md:translate-x-[40%] -translate-y-1/2 h-[100%] lg:h-full w-auto lg:-translate-x-[30%] text-secondary/10 pointer-events-none select-none overflow-hidden'
 					/>
-					<div className='relative z-10'>
+					<div className='relative z-10 pb-3.5 lg:pb-0'>
 						<SectionHeading
 							label={sectionLabel}
 							heading={heading}

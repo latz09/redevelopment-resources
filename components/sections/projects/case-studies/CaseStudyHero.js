@@ -29,7 +29,7 @@ const CaseStudyHero = ({ data }) => {
 				/>
 
 				<motion.div
-					className='relative z-10 section-x-padding lg:pt-5 lg:pb-5 space-y-1.5 lg:space-y-2'
+					className='relative z-10 section-x-padding pt-3.25 lg:pt-5 lg:pb-5 space-y-1.5 lg:space-y-2'
 					initial={reduceMotion ? false : 'hidden'}
 					animate='visible'
 					variants={textContainer}
