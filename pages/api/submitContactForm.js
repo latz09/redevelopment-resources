@@ -104,7 +104,7 @@ export default async function handler(req, res) {
 		sanityResult = await sanityClient.create({
 			_type: 'contactForm', // Make sure this matches your Sanity schema
 			...formData,
-			sentAt: new Date().toISOString(),
+			submittedAt: new Date().toISOString(),
 		});
 	} catch (sanityError) {
 		console.error('Error storing data in Sanity:', sanityError);
