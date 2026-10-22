@@ -31,7 +31,7 @@ const OurProjects = async () => {
 			<FlagshipProject data={flagship} />
 			<CaseStudies caseStudies={caseStudies} />
 			<TestimonialSection data={testimonialSection} quotes={testimonials} />
-			<GlobalCTA data={siteSettings?.globalCta} />
+			<GlobalCTA data={siteSettings?.globalCta} page='Our Projects' />
 		</PageContainer>
 	);
 };

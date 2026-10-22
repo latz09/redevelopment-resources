@@ -2,7 +2,7 @@
 
 import Section from '@/components/layout/Section';
 import SectionHeading from '@/components/ui/SectionHeading';
-import Link from 'next/link';
+import TrackedLink from '@/components/ui/TrackedLink';
 import { motion } from 'framer-motion';
 import { ArrowGrow } from '@/components/ui/ButtonLink';
 import ImageWindow from '@/components/ui/ImageWindow';
@@ -62,8 +62,9 @@ export default Services;
 
 const ServiceCard = ({ title, description, url, iconUrl, ctaLabel }) => {
 	return (
-		<Link
+		<TrackedLink
 			href={url || '#'}
+			event={`services-overview-${title}`}
 			className='group/card flex flex-col h-full bg-light hover:bg-primary transition-colors duration-300 p-1.25'
 		>
 			{iconUrl && (
@@ -93,6 +94,6 @@ const ServiceCard = ({ title, description, url, iconUrl, ctaLabel }) => {
 				<span>{ctaLabel || `Explore ${title}`}</span>
 				<ArrowGrow />
 			</span>
-		</Link>
+		</TrackedLink>
 	);
 };

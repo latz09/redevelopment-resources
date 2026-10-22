@@ -3,7 +3,7 @@ import SplitContent from '@/components/layout/SplitContent';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ButtonLink from '@/components/ui/ButtonLink';
 
-const ServiceOverview = ({ data }) => {
+const ServiceOverview = ({ data, pageFrom }) => {
 	const { sectionLabel, heading, body, cta } = data || {};
 
 	const paragraphs = (typeof body === 'string' ? body.split(/\n+/) : body || [])
@@ -38,7 +38,7 @@ const ServiceOverview = ({ data }) => {
 							<ButtonLink
 								href='/contact'
 								variant='primary-on-light'
-								event='Service Overview'
+								event={`${pageFrom} Overview - Contact`}
 							>
 								{cta.label}
 							</ButtonLink>

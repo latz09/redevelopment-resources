@@ -44,6 +44,7 @@ const SectorSection = ({ data, theme = 'dark', id = '' }) => {
 							row={row}
 							sectionHeading={heading}
 							theme={theme}
+							sectorId={id}
 						/>
 					))}
 				</div>
@@ -70,7 +71,7 @@ const SectorSection = ({ data, theme = 'dark', id = '' }) => {
 	);
 };
 
-const SectorRow = ({ row, sectionHeading, theme }) => {
+const SectorRow = ({ row, sectionHeading, theme, sectorId }) => {
 	const { heading, body, cta } = row || {};
 	const t = THEME[theme] || THEME.dark;
 	const href = cta?.caseStudy?.slug ? `/our-projects/${cta.caseStudy.slug}` : null;
@@ -91,7 +92,7 @@ const SectorRow = ({ row, sectionHeading, theme }) => {
 					<ButtonLink
 						href={href}
 						variant={t.button}
-						event={`Who We Serve - ${heading}`}
+						event={`${sectorId}-view-case-study`}
 					>
 						{cta.label}
 					</ButtonLink>

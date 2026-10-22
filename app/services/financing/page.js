@@ -15,7 +15,7 @@ const Financing = async () => {
 
   return (
     <PageContainer>
-     <ServicePageTemplate data={data} />
+     <ServicePageTemplate data={data} pageFrom='Financing' />
     </PageContainer>
   )
 }

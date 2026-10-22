@@ -35,7 +35,7 @@ const Home = async () => {
 				<WhoWeServe data={whoWeServe} />
 			</div>
 			<TestimonialSection data={testimonialSection} quotes={testimonials} />
-			<GlobalCTA data={globalCta} />
+			<GlobalCTA data={globalCta} page='Home' />
 		</PageContainer>
 	);
 };

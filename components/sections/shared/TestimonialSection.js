@@ -11,6 +11,7 @@ import {
 	useReducedMotion,
 	useTransform,
 } from 'framer-motion';
+import { trackOnce } from '@/utils/analytics/trackOnce';
 import SectionHeading from '@/components/ui/SectionHeading';
 import SectionGraphic from '@/components/ui/SectionGraphic';
 
@@ -67,13 +68,31 @@ const TestimonialSection = ({ data, quotes }) => {
 	const total = quotes.length;
 	const current = quotes[index];
 
-	const prev = () => {
+	// source: 'arrow' | 'swipe' — only the FIRST prev/next of a session gets
+	// tracked (trackOnce), so this tells you whether people engage with
+	// testimonials at all, without flooding the data from one visitor
+	// flipping through every quote.
+	const prev = (source = 'arrow') => {
+		const newIndex = (index - 1 + total) % total;
 		setDirection(-1);
-		setIndex((i) => (i - 1 + total) % total);
+		setIndex(newIndex);
+		trackOnce('testimonial-interaction', 'Testimonial Click', {
+			direction: 'prev',
+			source,
+			index: newIndex + 1,
+			total,
+		});
 	};
-	const next = () => {
+	const next = (source = 'arrow') => {
+		const newIndex = (index + 1) % total;
 		setDirection(1);
-		setIndex((i) => (i + 1) % total);
+		setIndex(newIndex);
+		trackOnce('testimonial-interaction', 'Testimonial Click', {
+			direction: 'next',
+			source,
+			index: newIndex + 1,
+			total,
+		});
 	};
 
 	// Dragging the quote itself swipes to the next/prev testimonial —
@@ -82,9 +101,9 @@ const TestimonialSection = ({ data, quotes }) => {
 		if (total <= 1) return;
 		const { offset, velocity } = info;
 		if (offset.x <= -SWIPE_DISTANCE || velocity.x <= -SWIPE_VELOCITY) {
-			next();
+			next('swipe');
 		} else if (offset.x >= SWIPE_DISTANCE || velocity.x >= SWIPE_VELOCITY) {
-			prev();
+			prev('swipe');
 		}
 	};
 
@@ -114,7 +133,7 @@ const TestimonialSection = ({ data, quotes }) => {
 					as='h2'
 					onDark={false}
 				/>
-				<Arrows onPrev={prev} onNext={next} className='place-self-end' />
+				<Arrows onPrev={() => prev()} onNext={() => next()} className='place-self-end' />
 			</div>
 		</div>
 

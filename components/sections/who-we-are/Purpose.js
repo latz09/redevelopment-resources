@@ -10,7 +10,9 @@ const Purpose = ({ data }) => {
 			<div className='grid lg:grid-cols-2 gap-1.5'>
 				<div className='space-y-2.5'>
 					<SectionHeading label={sectionLabel} heading={heading} />
-					<ButtonLink href={'/contact'} variant='primary-on-light'>
+					<ButtonLink href={'/contact'} variant='primary-on-light'
+					event={`Who We Are - Purpose - Contact`}
+					>
 						{cta?.label}
 					</ButtonLink>
 				</div>

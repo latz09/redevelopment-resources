@@ -118,6 +118,7 @@ const SectorCard = ({ data, alt, href }) => {
 			<ButtonLink
 				href={href}
 				variant='primary-on-dark'
+				event={`who-we-serve-${ctaLabel}`}
 				className='group-hover:text-dark group-hover:bg-light transition duration-1000 hover:border-dark'
 			>
 				{ctaLabel}

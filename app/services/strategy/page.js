@@ -15,7 +15,7 @@ const Strategy = async () => {
 
   return (
     <PageContainer>
-     <ServicePageTemplate data={data} />
+     <ServicePageTemplate data={data} pageFrom='Strategy' />
     </PageContainer>
   )
 }

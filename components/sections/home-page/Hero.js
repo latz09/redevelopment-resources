@@ -57,12 +57,12 @@ const Hero = ({ data }) => {
 					)}
 					<motion.div variants={textItem} className='flex flex-wrap gap-1 mt-1.5'>
 						{primaryCta?.label && (
-							<ButtonLink href={'/#services'} variant='primary-on-dark' event='Hero - Primary CTA'>
+							<ButtonLink href={'/#services'} variant='primary-on-dark' event='Hero - View Services'>
 								{primaryCta.label}
 							</ButtonLink>
 						)}
 						{secondaryCta?.label && (
-							<ButtonLink href={'/our-projects'} variant='secondary-on-dark' event='Hero - Secondary CTA'>
+							<ButtonLink href={'/our-projects'} variant='secondary-on-dark' event='Hero - View our work'>
 								{secondaryCta.label}
 							</ButtonLink>
 						)}

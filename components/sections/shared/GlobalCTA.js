@@ -16,7 +16,7 @@ const textItem = {
 	visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } },
 };
 
-const GlobalCTA = ({ data }) => {
+const GlobalCTA = ({ data, page }) => {
 	const { sectionLabel, headingLine1, headingLine2, ctaLabel, image } = data || {};
 	return (
 		<div className='grid lg:grid-cols-2'>
@@ -42,7 +42,7 @@ const GlobalCTA = ({ data }) => {
 					/>
 				</motion.div>
 				<motion.div variants={textItem}>
-					<ButtonLink href='/contact' variant='primary-on-light' className='self-start'>
+					<ButtonLink href='/contact' variant='primary-on-light' className='self-start' event={`Global CTA - ${page}-page`}>
 						{ctaLabel}
 					</ButtonLink>
 				</motion.div>

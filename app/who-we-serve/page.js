@@ -41,7 +41,7 @@ const WhoWeServe = async () => {
 					rows: [privateSector?.entrepreneurs, privateSector?.privateDevelopers].filter(Boolean),
 				}}
 			/>
-			<GlobalCTA data={globalCta} />
+			<GlobalCTA data={globalCta} page='Who We Serve' />
 		</PageContainer>
 	);
 };

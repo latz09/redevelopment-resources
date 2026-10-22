@@ -28,7 +28,7 @@ const WhoWeAre = async () => {
       <ByTheNumbers data={{ stats, statsImage }} />
       <Team data={team} />
       <Interns data={interns} />
-      <GlobalCTA data={globalCta} />
+      <GlobalCTA data={globalCta} page='Who We Are' />
     </PageContainer>
   )
 }

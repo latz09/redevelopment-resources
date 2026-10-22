@@ -165,6 +165,7 @@ const WorkRow = ({
 						href={cta.href}
 						variant='secondary-on-dark'
 						className={`self-start ${hasContentAbove ? 'mt-2.5' : ''}`}
+						event={`Work Showcase - ${title}`}
 					>
 						{cta.label}
 					</ButtonLink>

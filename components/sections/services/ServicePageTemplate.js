@@ -5,7 +5,7 @@ import ServiceOverview from './ServiceOverview';
 import Offerings from './Offerings';
 import WorkExamples from './WorkExamples';
 
-const ServicePageTemplate = ({ data }) => {
+const ServicePageTemplate = ({ data, pageFrom }) => {
 	const { page, examples, siteSettings } = data || {};
 	const {
 		title,
@@ -22,11 +22,11 @@ const ServicePageTemplate = ({ data }) => {
 			    over it. Everything after the overview stays outside. */}
 			<div>
 				<PageHero data={hero} graphic='hook-wave' />
-				<ServiceOverview data={overview} />
+				<ServiceOverview data={overview} pageFrom={pageFrom} />
 			</div>
 			<Offerings data={offerings} />
 			<WorkExamples data={workIntroduction} examples={examples} />
-			<GlobalCTA data={siteSettings?.globalCta} />
+			<GlobalCTA data={siteSettings?.globalCta} page={pageFrom} />
 		</>
 	);
 };
