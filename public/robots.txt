@@ -5,7 +5,7 @@ Disallow: /opengraph-image.jpg
 Disallow: /page-4
 
 # Host
-Host: https://www.latzwebdesign.com
+Host: https://redevelopment-resources.com
 
 # Sitemaps
-Sitemap: https://www.latzwebdesign.com/sitemap.xml
+Sitemap: https://redevelopment-resources.com/sitemap.xml

@@ -130,7 +130,9 @@ module.exports = {
 			maxWidth: {
 				'8xl': '1920px',
 				container: '1440px',
+				blogContainer: '1000px',
 				wide: '1728px', // her confirmed 1728px mockup width
+				blogWide: '1200px',
 			},
 			transitionDuration: {
 				DEFAULT: '300ms',

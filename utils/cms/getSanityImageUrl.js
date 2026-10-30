@@ -67,4 +67,12 @@ export const IMAGE_PRESETS = {
 	flagshipImage: { width: 1968, height: 696, quality: 90 },
 	caseStudyHero: { width: 1600, height: 566, quality: 90 }, // 82:29 banner
 	caseStudyHeroMobile: { width: 900, height: 600, quality: 90 }, // 3:2
+	// Articles / blog — added for the new blog feature. Ratios eyeballed off
+	// the blog-landing and article-detail Figma screens, not pixel-measured —
+	// adjust once the real example post is populated and these render at
+	// actual size.
+	blogFeatured: { width: 1600, height: 779, quality: 90 }, // 193:94, hero featured-post panel
+	articleCard: { width: 794, height: 438, quality: 90 }, // 397:219, blog grid + related-articles cards
+	articleHero: { width: 1736, height: 664, quality: 90 }, // 217:83, article detail banner
+	authorHeadshot: { width: 160, height: 160, quality: 90 }, // square, clipped to a circle in the byline
 };

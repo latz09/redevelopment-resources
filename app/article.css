@@ -1,0 +1,127 @@
+/* app/article.css
+ *
+ * Blog article typography — scoped under .article-typography, applied only
+ * to /articles/[slug] (PostHeader + PostSummary + PostBody + AuthorBio).
+ * Deliberately a SEPARATE file from globals.css, which stays completely
+ * untouched — nothing here can leak onto the rest of the site, since
+ * nothing outside this one wrapper has the .article-typography class.
+ *
+ * How the override works: every selector below is a class selector plus a
+ * type/class selector (e.g. `.article-typography h2`, `.article-typography
+ * .text-paragraph`). That's always more specific than the bare `h2` or
+ * `.text-paragraph` rules in globals.css, so these win automatically —
+ * no !important, no @layer ordering tricks, no edits to any component
+ * file. PortableTextComponents.js, PostHeader.js, PostSummary.js, and
+ * AuthorBio.js already use these exact class names for every heading,
+ * paragraph, caption, table cell, and the callout box, so redefining the
+ * SAME names here, just scoped, is the entire mechanism.
+ *
+ * Fill in the real values per rule below (TODO markers) — font-family,
+ * font-size (clamp), font-weight, line-height, letter-spacing, color —
+ * same shape as globals.css's own "guide Xrem" comments.
+ */
+
+.article-typography h1,
+.article-typography h2,
+.article-typography h3,
+.article-typography h4,
+.article-typography h5,
+.article-typography h6 {
+	color: var(--heading-color);
+	font-family: var(--font-heading);
+	font-weight: 700;
+	line-height: 1; /* 100% */
+
+	orphans: 2;
+	widows: 2;
+	word-break: normal;
+	overflow-wrap: break-word;
+	text-wrap: pretty;
+}
+
+.article-typography h1 {
+	font-size: clamp(2.4rem, 7vw, 4rem); /* guide 5rem */
+	letter-spacing: -0.004rem; /* guide */
+}
+
+.article-typography h2 {
+	font-size: clamp(1.875rem, 4.5vw, 3rem); /* guide 3rem */
+	letter-spacing: -0.03rem; /* guide */
+}
+
+.article-typography h3 {
+	font-size: clamp(1.5rem, 3.5vw, 2.25rem); /* guide 2.25rem */
+	letter-spacing: -0.00225rem; /* guide */
+}
+
+.article-typography h4 {
+	font-size: clamp(1.25rem, 3vw, 1.75rem); /* guide 1.75rem */
+	letter-spacing: -0.00175rem; /* guide */
+	line-height: 1.2; /* 120% */
+}
+
+.article-typography h5 {
+	color: var(--heading-color);
+	font-family: var(--font-body);
+	font-size: clamp(1.1rem, 1.6vw, 1.55rem); /* guide 1.25rem */
+
+	line-height: 1.2;
+	letter-spacing: -0.0015rem; /* not specified in guide — confirm */
+}
+
+/* PostHeader's byline, AuthorBio's name/bio, body paragraphs, table cell
+   text, the callout box's text — anything using .text-paragraph */
+.article-typography .text-paragraph {
+	color: var(--heading-color);
+	font-family: var(--font-body);
+	font-size: clamp(0.95rem, 1.3vw, 1.1rem); /* guide 1rem */
+	font-weight: 400;
+	line-height: 1.4; /* 140% */
+	letter-spacing: normal; /* not specified in guide — confirm */
+}
+
+/* PostSummary's lede paragraph */
+.article-typography .text-paragraph-lg {
+	color: var(--heading-color);
+	font-family: var(--font-body);
+	font-size: clamp(1.1rem, 1.6vw, 1.3rem); /* guide 1.25rem */
+	font-weight: 400;
+	line-height: 1.4; /* 140% */
+	letter-spacing: normal; /* not specified in guide — confirm */
+}
+
+/* "← Back to all blogs" link, author title under the byline/in AuthorBio,
+   image and video captions */
+.article-typography .text-paragraph-sm {
+	color: var(--heading-color);
+	font-family: var(--font-body);
+	font-size: clamp(0.8rem, 1.1vw, 0.875rem); /* guide 0.875rem */
+	font-weight: 400;
+	line-height: 1.4; /* 140% */
+	letter-spacing: normal; /* not specified in guide — confirm */
+}
+
+/* Date eyebrow in PostHeader ("February 2025") */
+.article-typography .text-overline {
+	color: var(--heading-color);
+	font-family: var(--font-body);
+	font-size: clamp(0.945rem, 1vw, 5rem); /* guide 1rem */
+	font-weight: 500; /* guide */
+	line-height: 1; /* 100% */
+	letter-spacing: -0.001rem; /* guide */
+}
+
+/* ButtonLink's label text — this also covers the inline CTA block's
+   button, since ButtonLink renders with this class internally regardless
+   of where it's used */
+
+
+/* Blockquote */
+.article-typography .text-callout {
+	color: var(--heading-color);
+	font-family: var(--font-heading); /* Cabinet Grotesk, per guide */
+	font-size: clamp(1.75rem, 2.5vw, 1.75rem); /* guide 1.75rem */
+	font-weight: 500; /* guide */
+	line-height: 1.2; /* 100% */
+	letter-spacing: -0.00175rem; /* guide */
+}

@@ -52,6 +52,10 @@ body {
 	@apply px-1 sm:px-1.25 md:px-2.5 lg:px-5 max-w-container mx-auto 3xl:max-w-wide;
 }
 
+.blog-section-padding {
+	@apply px-1 sm:px-1.25 md:px-2.5 lg:px-3 max-w-blogContainer mx-auto 3xl:max-w-blogWide;
+}
+
 @layer base {
 	/* font-weight and line-height ARE uniform across H1–H6 in this guide
 	   (700 / 100%), so they stay in the shared block. font-size and
