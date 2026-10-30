@@ -28,10 +28,13 @@ const isExternalLink = (href = '') => /^https?:\/\//.test(href);
 // Shared small/medium/large display-size convention for the image and
 // youTube body types - `large` (the default, for any content that predates
 // this field) keeps the original full-width look; medium/small cap the
-// width and center it.
+// width, but only from `md` up. Below that, a 45%-wide image on a ~375px
+// phone screen is only ~170px wide - not usable - so small/medium both stay
+// full-width on mobile and only shrink once there's enough room for it to
+// matter.
 const SIZE_CLASS = {
-	small: 'max-w-[45%]',
-	medium: 'max-w-[70%]',
+	small: 'max-w-full md:max-w-[45%]',
+	medium: 'max-w-full md:max-w-[70%]',
 	large: 'max-w-full',
 };
 
@@ -143,11 +146,14 @@ export const portableTextComponents = {
 			const widthScale = { small: 0.45, medium: 0.7, large: 1 }[size] ?? 1;
 			const targetWidth = Math.round(1400 * widthScale);
 			const height = Math.round(targetWidth / ratio);
+			// Breakpoint matches SIZE_CLASS's md cutoff, not lg - small/medium
+			// stay full-width below md now, so the fetched resolution should
+			// follow the same cutoff rather than switching a breakpoint early.
 			const sizesAttr =
 				size === 'small'
-					? '(max-width: 1024px) 60vw, 21rem'
+					? '(max-width: 768px) 100vw, 21rem'
 					: size === 'medium'
-						? '(max-width: 1024px) 80vw, 32rem'
+						? '(max-width: 768px) 100vw, 32rem'
 						: '(max-width: 1024px) 100vw, 46rem';
 			return (
 				<figure
