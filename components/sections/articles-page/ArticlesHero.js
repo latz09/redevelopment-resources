@@ -35,7 +35,7 @@ const ArticlesHero = ({ heading, subheading, featuredPost }) => {
 					variant='waveAlt'
 					className='absolute z-0 top-1/2 left-0 translate-x-[0%] md:translate-x-[40%] -translate-y-1/2  h-[140%] lg:h-full w-auto lg:-translate-x-[5%] 3xl:-translate-x-[30%] text-light/10 pointer-events-none select-none overflow-hidden'
 				/>
-				<div className='relative z-10 space-y-1 max-w-[33.4375rem] 3xl:max-w-[40rem] pt-5 pb-8.75'>
+				<div className='relative z-10 space-y-1 max-w-[33.4375rem] 3xl:max-w-[40rem] pt-5 pb-2.5 lg:pb-8.75'>
 					<h1 className='text-light'>{heading}</h1>
 					{subheading && (
 						<p className='text-paragraph-lg text-light'>{subheading}</p>

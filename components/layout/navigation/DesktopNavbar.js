@@ -8,7 +8,10 @@ import Logo from '@/components/lib/Logo';
 
 const DesktopNavbar = ({ navLinks, logoUrl }) => {
 	const isDark = useIsDarkRoute();
-	const mainLinks = navLinks.filter((link) => !link.isButton);
+	const mainLinks = [
+		...navLinks.filter((link) => !link.isButton),
+		{ label: 'Resources', url: '/articles' },
+	];
 	const contactLink = navLinks.find((link) => link.isButton);
 
 	const handleNavClick = (label, url) => {
@@ -138,9 +141,7 @@ const DropdownNavItem = ({ link, isDark, onNavClick }) => {
 			>
 				<div
 					className={`grid grid-cols-5 backdrop-blur-[13px]  lg:p-1.25 2xl:p-4 border rounded w-full ${
-						isDark
-							? 'bg-dark/90 border-accent'
-							: 'bg-light/90 border-accent'
+						isDark ? 'bg-dark/90 border-accent' : 'bg-light/90 border-accent'
 					}`}
 				>
 					{link.children.map((child, index) => (

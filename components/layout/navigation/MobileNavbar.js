@@ -52,7 +52,10 @@ const MobileNavbar = ({ navLinks = [], logoUrl }) => {
 		setIsNavOpen(false);
 	};
 
-	const mainLinks = navLinks.filter((link) => !link.isButton);
+	const mainLinks = [
+		...navLinks.filter((link) => !link.isButton),
+		{ label: 'Resources', url: '/articles' },
+	];
 	const contactLink = navLinks.find((link) => link.isButton);
 
 	// Scroll lock (unchanged)

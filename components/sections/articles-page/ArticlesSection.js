@@ -34,7 +34,7 @@ const ArticlesSection = ({ eyebrow, heading, posts = [], categories = [] }) => {
 				onDark={false}
 			/>
 
-			<div className='flex flex-wrap items-center gap-0.75 mt-4 mb-1.5'>
+			<div className='flex flex-wrap items-center gap-0.5 lg:gap-0.75 mt-4 mb-1.5'>
 				<span className='text-paragraph-lg font-[700]'>Filter:</span>
 				{['All', ...categories.map((c) => c.name)].map((name) => {
 					const isActive = name === activeCategory;
